@@ -23,6 +23,7 @@
       {% with name=request.resolver_match.namespace url_name=request.resolver_match.url_name %}
       <a href="{% url 'dashboard:home' %}" class="{% if name == 'dashboard' %}active{% endif %}">{% translate 'Overview' %}</a>
       <a href="{% url 'transactions:transaction_list' %}" class="{% if name == 'transactions' %}active{% endif %}">{% translate 'Transactions' %}</a>
+      <a href="{% url 'accounts:account_list' %}" class="{% if name == 'accounts' %}active{% endif %}">{% translate 'Accounts' %}</a>
       <a href="{% url 'savings:goal_list' %}" class="{% if name == 'savings' %}active{% endif %}">{% translate 'Savings' %}</a>
       <a href="{% url 'categories:category_list' %}" class="{% if url_name|slice:':8' == 'category' %}active{% endif %}">{% translate 'Categories' %}</a>
       <a href="{% url 'categories:rule_list' %}" class="{% if url_name|slice:':4' == 'rule' %}active{% endif %}">{% translate 'Rules' %}</a>

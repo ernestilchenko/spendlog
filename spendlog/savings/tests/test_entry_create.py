@@ -21,6 +21,7 @@ class EntryCreateTests(TestCase):
             'kind': 'deposit',
             'amount': '1000',
             'currency': 'PLN',
+            'account': '',
             'occurred_at': timezone.localtime().strftime('%Y-%m-%dT%H:%M'),
             'note': '',
         }

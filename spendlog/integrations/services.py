@@ -1,5 +1,6 @@
 import secrets
 
+from spendlog.accounts.services import assign_account, default_account
 from spendlog.categories.services import categorize_expense
 from django.utils import timezone
 
@@ -32,6 +33,7 @@ def record_apple_pay_payment(user, amount, currency, merchant, card):
         occurred_at=timezone.now(),
     )
     apply_conversion(transaction)
+    assign_account(transaction, default_account(user, currency))
     transaction.category = categorize_expense(user, merchant)
     transaction.save()
     return transaction

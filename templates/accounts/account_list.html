@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Accounts' %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% translate 'Accounts' %}</h1>
+    <p class="muted">{% blocktranslate with total=total_pln|money %}{{ total }} on accounts in total{% endblocktranslate %}</p>
+  </div>
+  <a href="{% url 'accounts:account_create' %}" class="button button-primary">{% translate 'New account' %}</a>
+</div>
+<section class="card">
+  {% if balances %}
+  <ul class="plain-list">
+    {% for item in balances %}
+    <li>
+      <a href="{% url 'accounts:account_update' item.account.pk %}" class="plain-row{% if item.account.is_archived %} muted{% endif %}">
+        <span><span class="dot" style="background: {{ item.account.color }}"></span>{{ item.account.name }}{% if item.account.is_archived %} · {% translate 'archived' %}{% endif %}</span>
+        <span class="tx-amount">
+          {{ item.balance|money:item.account.currency }}
+          {% if item.account.currency != 'PLN' and item.balance_pln is not None %}<small class="tx-converted">≈ {{ item.balance_pln|money }}</small>{% endif %}
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">{% translate 'No accounts yet. Add your card with its current balance, one account per currency.' %}</p>
+  {% endif %}
+</section>
+<p class="muted">{% translate 'The balance starts from the amount you enter and then follows your transactions: expenses take money out, income adds it, savings deposits move it to a goal.' %}</p>
+{% endblock %}

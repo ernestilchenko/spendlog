@@ -20,7 +20,7 @@ from .utils import UNCATEGORIZED, filter_transactions
 def transaction_list(request):
     month = parse_month(request.GET.get('month'))
     month_transactions = request.user.transactions.in_month(month)
-    transactions = filter_transactions(month_transactions, request.GET).select_related('category')
+    transactions = filter_transactions(month_transactions, request.GET).select_related('category', 'account')
     context = {
         'transactions': transactions,
         'month': month,

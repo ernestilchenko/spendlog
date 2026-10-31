@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% if account %}{{ account.name }}{% else %}{% translate 'New account' %}{% endif %}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% if account %}{{ account.name }}{% else %}{% translate 'New account' %}{% endif %}</h1></div>
+<form method="post" class="card form">
+  {% csrf_token %}
+  {% include 'partials/_form.html' %}
+  <div class="form-actions">
+    <button type="submit" class="button button-primary">{% translate 'Save' %}</button>
+    <a href="{% url 'accounts:account_list' %}" class="button">{% translate 'Cancel' %}</a>
+    {% if account %}<a href="{% url 'accounts:account_delete' account.pk %}" class="button button-danger push-right">{% translate 'Delete' %}</a>{% endif %}
+  </div>
+</form>
+{% endblock %}

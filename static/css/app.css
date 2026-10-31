@@ -741,3 +741,8 @@ select:focus {
 .stats-goal {
   margin: 20px 0 8px;
 }
+
+.total-row {
+  font-family: var(--serif);
+  font-size: 22px;
+}

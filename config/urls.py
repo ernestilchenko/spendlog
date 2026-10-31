@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('spendlog.users.urls')),
     path('transactions/', include('spendlog.transactions.urls')),
     path('savings/', include('spendlog.savings.urls')),
+    path('accounts/', include('spendlog.accounts.urls')),
     path('', include('spendlog.categories.urls')),
     path('', include('spendlog.integrations.urls')),
 ]

@@ -4,6 +4,7 @@ from decimal import Decimal
 from django.db.models import Sum
 from django.utils.translation import gettext
 
+from spendlog.accounts.services import account_balances, total_in_pln
 from spendlog.core.choices import TransactionKind
 from spendlog.savings.services import active_goal_progress, month_savings
 
@@ -61,16 +62,24 @@ def build_month_summary(user, month_start):
     budget_total = budgets.aggregate(total=Sum('monthly_budget'))['total']
     budget_spent = expenses.filter(category__in=budgets).total()
     saved = month_savings(user, month_start)
+    balances = account_balances(user)
+    goals = active_goal_progress(user)
+    on_accounts = total_in_pln(balances)
+    in_savings = sum((item.saved for item in goals), start=Decimal('0'))
     return {
         'income': income,
         'expense': expense,
         'saved': saved,
         'balance': income - expense - saved,
-        'goals': active_goal_progress(user),
+        'goals': goals,
+        'account_balances': balances,
+        'on_accounts': on_accounts,
+        'in_savings': in_savings,
+        'net_worth': on_accounts + in_savings,
         'category_rows': build_category_rows(user, expenses),
         'budget_total': budget_total,
         'budget_spent': budget_spent,
         'budget_left': budget_total - budget_spent if budget_total else None,
-        'recent_transactions': transactions.select_related('category')[:RECENT_LIMIT],
+        'recent_transactions': transactions.select_related('category', 'account')[:RECENT_LIMIT],
         'transaction_count': transactions.count(),
     }

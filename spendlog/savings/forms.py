@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from spendlog.transactions.forms import DATETIME_INPUT_FORMAT
 
@@ -19,12 +20,15 @@ class SavingsGoalForm(forms.ModelForm):
 class SavingsEntryForm(forms.ModelForm):
     class Meta:
         model = SavingsEntry
-        fields = ('kind', 'amount', 'currency', 'occurred_at', 'note')
+        fields = ('kind', 'amount', 'currency', 'account', 'occurred_at', 'note')
         widgets = {
             'occurred_at': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format=DATETIME_INPUT_FORMAT),
             'amount': forms.NumberInput(attrs={'step': '0.01', 'min': '0.01', 'inputmode': 'decimal'}),
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['occurred_at'].input_formats = [DATETIME_INPUT_FORMAT]
+        self.fields['account'].queryset = user.accounts.filter(is_archived=False)
+        self.fields['account'].empty_label = _('Not from an account')
+        self.fields['account'].help_text = _('Pick the account the money moves from or back to. Leave empty for money you already had saved.')

@@ -73,7 +73,7 @@ def entry_create(request, pk):
         'occurred_at': timezone.localtime().replace(second=0, microsecond=0),
         'kind': request.GET.get('kind', SavingsEntryKind.DEPOSIT),
     }
-    form = SavingsEntryForm(request.POST or None, initial=initial)
+    form = SavingsEntryForm(request.POST or None, initial=initial, user=request.user)
     if request.method == 'POST' and form.is_valid():
         try:
             save_entry(form, goal)

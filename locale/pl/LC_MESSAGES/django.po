@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spendlog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-31 12:05+0100\n"
+"POT-Creation-Date: 2026-10-31 13:41+0100\n"
 "PO-Revision-Date: 2026-10-31 12:00+0100\n"
 "Last-Translator: Ernest Ilchenko <ernestilchenko@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -17,17 +17,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: config/settings/base.py:106
+#: config/settings/base.py:107
 msgid "English"
 msgstr "Angielski"
 
-#: config/settings/base.py:107
+#: config/settings/base.py:108
 msgid "Polish"
 msgstr "Polski"
 
-#: config/settings/base.py:108
+#: config/settings/base.py:109
 msgid "Ukrainian"
 msgstr "Ukraiński"
+
+#: spendlog/accounts/messages.py:5
+msgid "Account created"
+msgstr "Konto utworzone"
+
+#: spendlog/accounts/messages.py:6
+msgid "Account saved"
+msgstr "Konto zapisane"
+
+#: spendlog/accounts/messages.py:7
+msgid "Account deleted"
+msgstr "Konto usunięte"
+
+#: spendlog/accounts/models.py:14 spendlog/categories/models.py:12
+#: spendlog/savings/models.py:18
+msgid "name"
+msgstr "nazwa"
+
+#: spendlog/accounts/models.py:15 spendlog/currencies/models.py:8
+#: spendlog/savings/models.py:45 spendlog/transactions/models.py:21
+msgid "currency"
+msgstr "waluta"
+
+#: spendlog/accounts/models.py:16
+msgid "balance at start"
+msgstr "saldo początkowe"
+
+#: spendlog/accounts/models.py:17
+msgid "balance date"
+msgstr "data salda"
+
+#: spendlog/accounts/models.py:18 spendlog/categories/models.py:14
+#: spendlog/savings/models.py:28
+msgid "color"
+msgstr "kolor"
+
+#: spendlog/accounts/models.py:19 spendlog/savings/models.py:29
+#: templates/accounts/account_list.html:18
+msgid "archived"
+msgstr "zarchiwizowany"
+
+#: spendlog/accounts/models.py:23 spendlog/savings/models.py:54
+#: spendlog/transactions/models.py:39
+msgid "account"
+msgstr "konto"
+
+#: spendlog/accounts/models.py:24
+msgid "accounts"
+msgstr "konta"
 
 #: spendlog/categories/messages.py:5
 msgid "Category created"
@@ -57,25 +106,17 @@ msgstr "Reguła usunięta"
 msgid "A rule for this merchant already exists"
 msgstr "Reguła dla tego sprzedawcy już istnieje"
 
-#: spendlog/categories/models.py:12 spendlog/savings/models.py:17
-msgid "name"
-msgstr "nazwa"
-
-#: spendlog/categories/models.py:13 spendlog/savings/models.py:42
-#: spendlog/transactions/models.py:18
+#: spendlog/categories/models.py:13 spendlog/savings/models.py:43
+#: spendlog/transactions/models.py:19
 msgid "type"
 msgstr "typ"
-
-#: spendlog/categories/models.py:14 spendlog/savings/models.py:27
-msgid "color"
-msgstr "kolor"
 
 #: spendlog/categories/models.py:15
 msgid "monthly budget"
 msgstr "budżet miesięczny"
 
 #: spendlog/categories/models.py:19 spendlog/categories/models.py:36
-#: spendlog/transactions/models.py:30
+#: spendlog/transactions/models.py:31
 msgid "category"
 msgstr "kategoria"
 
@@ -180,13 +221,8 @@ msgstr "Wypłata"
 msgid "Could not get the exchange rate. Try again in a minute or use PLN."
 msgstr "Nie udało się pobrać kursu waluty. Spróbuj za minutę lub użyj PLN."
 
-#: spendlog/currencies/models.py:8 spendlog/savings/models.py:44
-#: spendlog/transactions/models.py:20
-msgid "currency"
-msgstr "waluta"
-
-#: spendlog/currencies/models.py:9 spendlog/savings/models.py:47
-#: spendlog/transactions/models.py:32
+#: spendlog/currencies/models.py:9 spendlog/savings/models.py:57
+#: spendlog/transactions/models.py:42
 msgid "date"
 msgstr "data"
 
@@ -194,7 +230,7 @@ msgstr "data"
 msgid "rate to PLN"
 msgstr "kurs do PLN"
 
-#: spendlog/dashboard/services.py:47 spendlog/integrations/messages.py:7
+#: spendlog/dashboard/services.py:48 spendlog/integrations/messages.py:7
 #: templates/partials/_transaction_row.html:7
 #: templates/transactions/transaction_list.html:17
 msgid "Uncategorized"
@@ -212,6 +248,18 @@ msgstr "Nie udało się odczytać kwoty płatności"
 msgid "New token created. Copy it now: it will not be shown again"
 msgstr ""
 "Utworzono nowy token. Skopiuj go teraz: nie zostanie pokazany ponownie"
+
+#: spendlog/savings/forms.py:33
+msgid "Not from an account"
+msgstr "Nie z konta"
+
+#: spendlog/savings/forms.py:34
+msgid ""
+"Pick the account the money moves from or back to. Leave empty for money you "
+"already had saved."
+msgstr ""
+"Wybierz konto, z którego pieniądze wychodzą lub na które wracają. Zostaw "
+"puste dla pieniędzy, które już miałeś odłożone."
 
 #: spendlog/savings/messages.py:5
 msgid "Goal created"
@@ -237,51 +285,51 @@ msgstr "Wpis usunięty"
 msgid "There is not that much in this goal"
 msgstr "W tym celu nie ma aż tyle pieniędzy"
 
-#: spendlog/savings/models.py:19
+#: spendlog/savings/models.py:20
 msgid "target in PLN"
 msgstr "cel w PLN"
 
-#: spendlog/savings/models.py:26
+#: spendlog/savings/models.py:27
 msgid "target date"
 msgstr "termin"
 
-#: spendlog/savings/models.py:28
-msgid "archived"
-msgstr "zarchiwizowany"
-
-#: spendlog/savings/models.py:32
+#: spendlog/savings/models.py:33
 msgid "savings goal"
 msgstr "cel oszczędnościowy"
 
-#: spendlog/savings/models.py:33
+#: spendlog/savings/models.py:34
 msgid "savings goals"
 msgstr "cele oszczędnościowe"
 
-#: spendlog/savings/models.py:41
+#: spendlog/savings/models.py:42
 msgid "goal"
 msgstr "cel"
 
-#: spendlog/savings/models.py:43 spendlog/transactions/models.py:19
+#: spendlog/savings/models.py:44 spendlog/transactions/models.py:20
 msgid "amount"
 msgstr "kwota"
 
-#: spendlog/savings/models.py:45 spendlog/transactions/models.py:21
+#: spendlog/savings/models.py:46 spendlog/transactions/models.py:22
 msgid "amount in PLN"
 msgstr "kwota w PLN"
 
-#: spendlog/savings/models.py:46 spendlog/transactions/models.py:22
+#: spendlog/savings/models.py:47 spendlog/transactions/models.py:23
 msgid "exchange rate"
 msgstr "kurs wymiany"
 
-#: spendlog/savings/models.py:48 spendlog/transactions/models.py:35
+#: spendlog/savings/models.py:56 spendlog/transactions/models.py:41
+msgid "amount in account currency"
+msgstr "kwota w walucie konta"
+
+#: spendlog/savings/models.py:58 spendlog/transactions/models.py:45
 msgid "note"
 msgstr "notatka"
 
-#: spendlog/savings/models.py:54
+#: spendlog/savings/models.py:64
 msgid "savings entry"
 msgstr "wpis oszczędności"
 
-#: spendlog/savings/models.py:55
+#: spendlog/savings/models.py:65
 msgid "savings entries"
 msgstr "wpisy oszczędności"
 
@@ -289,7 +337,7 @@ msgstr "wpisy oszczędności"
 msgid "Always use this category for this merchant"
 msgstr "Zawsze używaj tej kategorii dla tego sprzedawcy"
 
-#: spendlog/transactions/forms.py:24
+#: spendlog/transactions/forms.py:24 spendlog/transactions/forms.py:26
 msgid "Auto"
 msgstr "Automatycznie"
 
@@ -309,23 +357,23 @@ msgstr "Transakcja usunięta"
 msgid "This category does not match the transaction type"
 msgstr "Ta kategoria nie pasuje do typu transakcji"
 
-#: spendlog/transactions/models.py:23
+#: spendlog/transactions/models.py:24
 msgid "merchant"
 msgstr "sprzedawca"
 
-#: spendlog/transactions/models.py:33
+#: spendlog/transactions/models.py:43
 msgid "source"
 msgstr "źródło"
 
-#: spendlog/transactions/models.py:34
+#: spendlog/transactions/models.py:44
 msgid "card"
 msgstr "karta"
 
-#: spendlog/transactions/models.py:41
+#: spendlog/transactions/models.py:51
 msgid "transaction"
 msgstr "transakcja"
 
-#: spendlog/transactions/models.py:42
+#: spendlog/transactions/models.py:52
 msgid "transactions"
 msgstr "transakcje"
 
@@ -337,54 +385,24 @@ msgstr "E-mail"
 msgid "Password"
 msgstr "Hasło"
 
-#: templates/base.html:24 templates/dashboard/home.html:3
-msgid "Overview"
-msgstr "Przegląd"
+#: templates/accounts/account_confirm_delete.html:3
+msgid "Delete account"
+msgstr "Usuń konto"
 
-#: templates/base.html:25 templates/transactions/transaction_list.html:3
-msgid "Transactions"
-msgstr "Transakcje"
-
-#: templates/base.html:26 templates/savings/goal_list.html:3
-#: templates/savings/goal_list.html:7
-msgid "Savings"
-msgstr "Oszczędności"
-
-#: templates/base.html:27 templates/categories/category_list.html:3
-#: templates/categories/category_list.html:6
-msgid "Categories"
-msgstr "Kategorie"
-
-#: templates/base.html:28 templates/categories/rule_list.html:3
-msgid "Rules"
-msgstr "Reguły"
-
-#: templates/base.html:38
-msgid "Log out"
-msgstr "Wyloguj"
-
-#: templates/base.html:48
-msgid "Add transaction"
-msgstr "Dodaj transakcję"
-
-#: templates/categories/category_confirm_delete.html:3
-msgid "Delete category"
-msgstr "Usuń kategorię"
-
+#: templates/accounts/account_confirm_delete.html:7
 #: templates/categories/category_confirm_delete.html:7
 #: templates/savings/goal_confirm_delete.html:7
 #, python-format
 msgid "Delete “%(name)s”?"
 msgstr "Usunąć „%(name)s”?"
 
-#: templates/categories/category_confirm_delete.html:8
+#: templates/accounts/account_confirm_delete.html:8
 msgid ""
-"Its transactions stay and become uncategorized. Merchant rules pointing to "
-"it are removed."
-msgstr ""
-"Jej transakcje zostaną, ale stracą kategorię. Reguły sprzedawców wskazujące "
-"na nią zostaną usunięte."
+"Transactions stay, they just will not be linked to this account any more."
+msgstr "Transakcje zostaną, po prostu nie będą już powiązane z tym kontem."
 
+#: templates/accounts/account_confirm_delete.html:10
+#: templates/accounts/account_form.html:12
 #: templates/categories/category_confirm_delete.html:10
 #: templates/categories/category_form.html:14
 #: templates/categories/rule_confirm_delete.html:10
@@ -397,6 +415,8 @@ msgstr ""
 msgid "Delete"
 msgstr "Usuń"
 
+#: templates/accounts/account_confirm_delete.html:11
+#: templates/accounts/account_form.html:11
 #: templates/categories/category_confirm_delete.html:11
 #: templates/categories/category_form.html:13
 #: templates/categories/rule_confirm_delete.html:11
@@ -410,6 +430,91 @@ msgstr "Usuń"
 msgid "Cancel"
 msgstr "Anuluj"
 
+#: templates/accounts/account_form.html:3
+#: templates/accounts/account_form.html:5
+#: templates/accounts/account_list.html:10
+msgid "New account"
+msgstr "Nowe konto"
+
+#: templates/accounts/account_form.html:10
+#: templates/categories/category_form.html:12
+#: templates/categories/rule_form.html:10 templates/savings/entry_form.html:10
+#: templates/savings/goal_form.html:10
+#: templates/transactions/transaction_form.html:14
+msgid "Save"
+msgstr "Zapisz"
+
+#: templates/accounts/account_list.html:3
+#: templates/accounts/account_list.html:7 templates/base.html:26
+#: templates/dashboard/home.html:68
+msgid "Accounts"
+msgstr "Konta"
+
+#: templates/accounts/account_list.html:8
+#, python-format
+msgid "%(total)s on accounts in total"
+msgstr "Łącznie na kontach %(total)s"
+
+#: templates/accounts/account_list.html:28
+msgid ""
+"No accounts yet. Add your card with its current balance, one account per "
+"currency."
+msgstr ""
+"Nie ma jeszcze kont. Dodaj kartę z aktualnym saldem, osobne konto dla każdej"
+" waluty."
+
+#: templates/accounts/account_list.html:31
+msgid ""
+"The balance starts from the amount you enter and then follows your "
+"transactions: expenses take money out, income adds it, savings deposits move"
+" it to a goal."
+msgstr ""
+"Saldo zaczyna się od podanej kwoty, a potem zmienia się razem z "
+"transakcjami: wydatki je zmniejszają, przychody zwiększają, a wpłaty na cele"
+" przenoszą pieniądze do oszczędności."
+
+#: templates/base.html:24 templates/dashboard/home.html:3
+msgid "Overview"
+msgstr "Przegląd"
+
+#: templates/base.html:25 templates/transactions/transaction_list.html:3
+msgid "Transactions"
+msgstr "Transakcje"
+
+#: templates/base.html:27 templates/savings/goal_list.html:3
+#: templates/savings/goal_list.html:7
+msgid "Savings"
+msgstr "Oszczędności"
+
+#: templates/base.html:28 templates/categories/category_list.html:3
+#: templates/categories/category_list.html:6
+msgid "Categories"
+msgstr "Kategorie"
+
+#: templates/base.html:29 templates/categories/rule_list.html:3
+msgid "Rules"
+msgstr "Reguły"
+
+#: templates/base.html:39
+msgid "Log out"
+msgstr "Wyloguj"
+
+#: templates/base.html:49
+msgid "Add transaction"
+msgstr "Dodaj transakcję"
+
+#: templates/categories/category_confirm_delete.html:3
+msgid "Delete category"
+msgstr "Usuń kategorię"
+
+#: templates/categories/category_confirm_delete.html:8
+msgid ""
+"Its transactions stay and become uncategorized. Merchant rules pointing to "
+"it are removed."
+msgstr ""
+"Jej transakcje zostaną, ale stracą kategorię. Reguły sprzedawców wskazujące "
+"na nią zostaną usunięte."
+
 #: templates/categories/category_form.html:3
 msgid "Edit category"
 msgstr "Edytuj kategorię"
@@ -419,13 +524,6 @@ msgstr "Edytuj kategorię"
 #: templates/categories/category_list.html:7
 msgid "New category"
 msgstr "Nowa kategoria"
-
-#: templates/categories/category_form.html:12
-#: templates/categories/rule_form.html:10 templates/savings/entry_form.html:10
-#: templates/savings/goal_form.html:10
-#: templates/transactions/transaction_form.html:14
-msgid "Save"
-msgstr "Zapisz"
 
 #: templates/categories/category_list.html:19
 #, python-format
@@ -499,23 +597,35 @@ msgid "No expenses this month yet."
 msgstr "W tym miesiącu nie ma jeszcze wydatków."
 
 #: templates/dashboard/home.html:67
+msgid "Money now"
+msgstr "Pieniądze teraz"
+
+#: templates/dashboard/home.html:81
+msgid "In savings goals"
+msgstr "W celach oszczędnościowych"
+
+#: templates/dashboard/home.html:83
+msgid "Total"
+msgstr "Razem"
+
+#: templates/dashboard/home.html:91
 msgid "Savings goals"
 msgstr "Cele oszczędnościowe"
 
-#: templates/dashboard/home.html:68
+#: templates/dashboard/home.html:92
 msgid "All goals"
 msgstr "Wszystkie cele"
 
-#: templates/dashboard/home.html:78
+#: templates/dashboard/home.html:102
 msgid "Latest"
 msgstr "Ostatnie"
 
-#: templates/dashboard/home.html:79
+#: templates/dashboard/home.html:103
 #, python-format
 msgid "All %(count)s"
 msgstr "Wszystkie %(count)s"
 
-#: templates/dashboard/home.html:89
+#: templates/dashboard/home.html:113
 #, python-format
 msgid ""
 "Nothing here yet. Pay with Apple Pay or <a href=\"%(create_url)s\">add a "
@@ -820,6 +930,3 @@ msgstr "Dalej"
 #: templates/users/login.html:14
 msgid "Spendlog · personal budget"
 msgstr "Spendlog · budżet osobisty"
-
-#~ msgid "Balance"
-#~ msgstr "Saldo"

@@ -42,6 +42,7 @@ LOCAL_APPS = [
     'spendlog.users.apps.UsersConfig',
     'spendlog.categories.apps.CategoriesConfig',
     'spendlog.currencies.apps.CurrenciesConfig',
+    'spendlog.accounts.apps.AccountsConfig',
     'spendlog.transactions.apps.TransactionsConfig',
     'spendlog.savings.apps.SavingsConfig',
     'spendlog.integrations.apps.IntegrationsConfig',

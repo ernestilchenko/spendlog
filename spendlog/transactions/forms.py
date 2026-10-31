@@ -12,7 +12,7 @@ class TransactionForm(forms.ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ('kind', 'amount', 'currency', 'merchant', 'category', 'occurred_at', 'note')
+        fields = ('kind', 'amount', 'currency', 'account', 'merchant', 'category', 'occurred_at', 'note')
         widgets = {
             'occurred_at': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format=DATETIME_INPUT_FORMAT),
             'amount': forms.NumberInput(attrs={'step': '0.01', 'min': '0.01', 'inputmode': 'decimal'}),
@@ -22,6 +22,8 @@ class TransactionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['category'].queryset = user.categories.all()
         self.fields['category'].empty_label = _('Auto')
+        self.fields['account'].queryset = user.accounts.filter(is_archived=False)
+        self.fields['account'].empty_label = _('Auto')
         self.fields['occurred_at'].input_formats = [DATETIME_INPUT_FORMAT]
 
     def clean(self):

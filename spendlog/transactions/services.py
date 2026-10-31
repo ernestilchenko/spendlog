@@ -1,3 +1,4 @@
+from spendlog.accounts.services import assign_account, default_account
 from spendlog.categories.services import categorize_expense, remember_merchant
 from spendlog.core.choices import TransactionKind
 from spendlog.currencies.services import apply_conversion
@@ -7,6 +8,7 @@ def save_transaction(form, user):
     transaction = form.save(commit=False)
     transaction.user = user
     apply_conversion(transaction)
+    assign_account(transaction, transaction.account or default_account(user, transaction.currency))
     if transaction.category is None and transaction.kind == TransactionKind.EXPENSE and transaction.merchant:
         transaction.category = categorize_expense(user, transaction.merchant)
     transaction.save()

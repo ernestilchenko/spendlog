@@ -61,6 +61,30 @@
   {% endif %}
 </section>
 
+{% if account_balances %}
+<section class="card">
+  <div class="card-head">
+    <h2>{% translate 'Money now' %}</h2>
+    <a href="{% url 'accounts:account_list' %}">{% translate 'Accounts' %}</a>
+  </div>
+  <ul class="plain-list">
+    {% for item in account_balances %}
+    <li class="plain-row">
+      <span><span class="dot" style="background: {{ item.account.color }}"></span>{{ item.account.name }}</span>
+      <span class="tx-amount">
+        {{ item.balance|money:item.account.currency }}
+        {% if item.account.currency != 'PLN' and item.balance_pln is not None %}<small class="tx-converted">≈ {{ item.balance_pln|money }}</small>{% endif %}
+      </span>
+    </li>
+    {% endfor %}
+    {% if in_savings %}
+    <li class="plain-row"><span class="muted">{% translate 'In savings goals' %}</span><span class="tx-amount">{{ in_savings|money }}</span></li>
+    {% endif %}
+    <li class="plain-row total-row"><span>{% translate 'Total' %}</span><span class="tx-amount">{{ net_worth|money }}</span></li>
+  </ul>
+</section>
+{% endif %}
+
 {% if goals %}
 <section class="card">
   <div class="card-head">

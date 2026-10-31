@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spendlog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-31 12:05+0100\n"
+"POT-Creation-Date: 2026-10-31 13:41+0100\n"
 "PO-Revision-Date: 2026-10-31 12:00+0100\n"
 "Last-Translator: Ernest Ilchenko <ernestilchenko@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -17,17 +17,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: config/settings/base.py:106
+#: config/settings/base.py:107
 msgid "English"
 msgstr "Англійська"
 
-#: config/settings/base.py:107
+#: config/settings/base.py:108
 msgid "Polish"
 msgstr "Польська"
 
-#: config/settings/base.py:108
+#: config/settings/base.py:109
 msgid "Ukrainian"
 msgstr "Українська"
+
+#: spendlog/accounts/messages.py:5
+msgid "Account created"
+msgstr "Рахунок створено"
+
+#: spendlog/accounts/messages.py:6
+msgid "Account saved"
+msgstr "Рахунок збережено"
+
+#: spendlog/accounts/messages.py:7
+msgid "Account deleted"
+msgstr "Рахунок видалено"
+
+#: spendlog/accounts/models.py:14 spendlog/categories/models.py:12
+#: spendlog/savings/models.py:18
+msgid "name"
+msgstr "назва"
+
+#: spendlog/accounts/models.py:15 spendlog/currencies/models.py:8
+#: spendlog/savings/models.py:45 spendlog/transactions/models.py:21
+msgid "currency"
+msgstr "валюта"
+
+#: spendlog/accounts/models.py:16
+msgid "balance at start"
+msgstr "початковий залишок"
+
+#: spendlog/accounts/models.py:17
+msgid "balance date"
+msgstr "дата залишку"
+
+#: spendlog/accounts/models.py:18 spendlog/categories/models.py:14
+#: spendlog/savings/models.py:28
+msgid "color"
+msgstr "колір"
+
+#: spendlog/accounts/models.py:19 spendlog/savings/models.py:29
+#: templates/accounts/account_list.html:18
+msgid "archived"
+msgstr "в архіві"
+
+#: spendlog/accounts/models.py:23 spendlog/savings/models.py:54
+#: spendlog/transactions/models.py:39
+msgid "account"
+msgstr "рахунок"
+
+#: spendlog/accounts/models.py:24
+msgid "accounts"
+msgstr "рахунки"
 
 #: spendlog/categories/messages.py:5
 msgid "Category created"
@@ -57,25 +106,17 @@ msgstr "Правило видалено"
 msgid "A rule for this merchant already exists"
 msgstr "Правило для цього продавця вже існує"
 
-#: spendlog/categories/models.py:12 spendlog/savings/models.py:17
-msgid "name"
-msgstr "назва"
-
-#: spendlog/categories/models.py:13 spendlog/savings/models.py:42
-#: spendlog/transactions/models.py:18
+#: spendlog/categories/models.py:13 spendlog/savings/models.py:43
+#: spendlog/transactions/models.py:19
 msgid "type"
 msgstr "тип"
-
-#: spendlog/categories/models.py:14 spendlog/savings/models.py:27
-msgid "color"
-msgstr "колір"
 
 #: spendlog/categories/models.py:15
 msgid "monthly budget"
 msgstr "місячний бюджет"
 
 #: spendlog/categories/models.py:19 spendlog/categories/models.py:36
-#: spendlog/transactions/models.py:30
+#: spendlog/transactions/models.py:31
 msgid "category"
 msgstr "категорія"
 
@@ -181,13 +222,8 @@ msgid "Could not get the exchange rate. Try again in a minute or use PLN."
 msgstr ""
 "Не вдалося отримати курс валюти. Спробуйте за хвилину або використайте PLN."
 
-#: spendlog/currencies/models.py:8 spendlog/savings/models.py:44
-#: spendlog/transactions/models.py:20
-msgid "currency"
-msgstr "валюта"
-
-#: spendlog/currencies/models.py:9 spendlog/savings/models.py:47
-#: spendlog/transactions/models.py:32
+#: spendlog/currencies/models.py:9 spendlog/savings/models.py:57
+#: spendlog/transactions/models.py:42
 msgid "date"
 msgstr "дата"
 
@@ -195,7 +231,7 @@ msgstr "дата"
 msgid "rate to PLN"
 msgstr "курс до PLN"
 
-#: spendlog/dashboard/services.py:47 spendlog/integrations/messages.py:7
+#: spendlog/dashboard/services.py:48 spendlog/integrations/messages.py:7
 #: templates/partials/_transaction_row.html:7
 #: templates/transactions/transaction_list.html:17
 msgid "Uncategorized"
@@ -213,6 +249,18 @@ msgstr "Не вдалося прочитати суму платежу"
 msgid "New token created. Copy it now: it will not be shown again"
 msgstr ""
 "Створено новий токен. Скопіюйте його зараз: більше його не буде показано"
+
+#: spendlog/savings/forms.py:33
+msgid "Not from an account"
+msgstr "Не з рахунку"
+
+#: spendlog/savings/forms.py:34
+msgid ""
+"Pick the account the money moves from or back to. Leave empty for money you "
+"already had saved."
+msgstr ""
+"Оберіть рахунок, з якого гроші йдуть або на який повертаються. Залиште "
+"порожнім для грошей, які ви вже мали відкладеними."
 
 #: spendlog/savings/messages.py:5
 msgid "Goal created"
@@ -238,51 +286,51 @@ msgstr "Запис видалено"
 msgid "There is not that much in this goal"
 msgstr "У цій цілі немає стільки грошей"
 
-#: spendlog/savings/models.py:19
+#: spendlog/savings/models.py:20
 msgid "target in PLN"
 msgstr "ціль у PLN"
 
-#: spendlog/savings/models.py:26
+#: spendlog/savings/models.py:27
 msgid "target date"
 msgstr "термін"
 
-#: spendlog/savings/models.py:28
-msgid "archived"
-msgstr "в архіві"
-
-#: spendlog/savings/models.py:32
+#: spendlog/savings/models.py:33
 msgid "savings goal"
 msgstr "ціль заощаджень"
 
-#: spendlog/savings/models.py:33
+#: spendlog/savings/models.py:34
 msgid "savings goals"
 msgstr "цілі заощаджень"
 
-#: spendlog/savings/models.py:41
+#: spendlog/savings/models.py:42
 msgid "goal"
 msgstr "ціль"
 
-#: spendlog/savings/models.py:43 spendlog/transactions/models.py:19
+#: spendlog/savings/models.py:44 spendlog/transactions/models.py:20
 msgid "amount"
 msgstr "сума"
 
-#: spendlog/savings/models.py:45 spendlog/transactions/models.py:21
+#: spendlog/savings/models.py:46 spendlog/transactions/models.py:22
 msgid "amount in PLN"
 msgstr "сума в PLN"
 
-#: spendlog/savings/models.py:46 spendlog/transactions/models.py:22
+#: spendlog/savings/models.py:47 spendlog/transactions/models.py:23
 msgid "exchange rate"
 msgstr "курс обміну"
 
-#: spendlog/savings/models.py:48 spendlog/transactions/models.py:35
+#: spendlog/savings/models.py:56 spendlog/transactions/models.py:41
+msgid "amount in account currency"
+msgstr "сума у валюті рахунку"
+
+#: spendlog/savings/models.py:58 spendlog/transactions/models.py:45
 msgid "note"
 msgstr "нотатка"
 
-#: spendlog/savings/models.py:54
+#: spendlog/savings/models.py:64
 msgid "savings entry"
 msgstr "запис заощаджень"
 
-#: spendlog/savings/models.py:55
+#: spendlog/savings/models.py:65
 msgid "savings entries"
 msgstr "записи заощаджень"
 
@@ -290,7 +338,7 @@ msgstr "записи заощаджень"
 msgid "Always use this category for this merchant"
 msgstr "Завжди використовувати цю категорію для цього продавця"
 
-#: spendlog/transactions/forms.py:24
+#: spendlog/transactions/forms.py:24 spendlog/transactions/forms.py:26
 msgid "Auto"
 msgstr "Автоматично"
 
@@ -310,23 +358,23 @@ msgstr "Операцію видалено"
 msgid "This category does not match the transaction type"
 msgstr "Ця категорія не відповідає типу операції"
 
-#: spendlog/transactions/models.py:23
+#: spendlog/transactions/models.py:24
 msgid "merchant"
 msgstr "продавець"
 
-#: spendlog/transactions/models.py:33
+#: spendlog/transactions/models.py:43
 msgid "source"
 msgstr "джерело"
 
-#: spendlog/transactions/models.py:34
+#: spendlog/transactions/models.py:44
 msgid "card"
 msgstr "картка"
 
-#: spendlog/transactions/models.py:41
+#: spendlog/transactions/models.py:51
 msgid "transaction"
 msgstr "операція"
 
-#: spendlog/transactions/models.py:42
+#: spendlog/transactions/models.py:52
 msgid "transactions"
 msgstr "операції"
 
@@ -338,54 +386,25 @@ msgstr "Електронна пошта"
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/base.html:24 templates/dashboard/home.html:3
-msgid "Overview"
-msgstr "Огляд"
+#: templates/accounts/account_confirm_delete.html:3
+msgid "Delete account"
+msgstr "Видалити рахунок"
 
-#: templates/base.html:25 templates/transactions/transaction_list.html:3
-msgid "Transactions"
-msgstr "Операції"
-
-#: templates/base.html:26 templates/savings/goal_list.html:3
-#: templates/savings/goal_list.html:7
-msgid "Savings"
-msgstr "Заощадження"
-
-#: templates/base.html:27 templates/categories/category_list.html:3
-#: templates/categories/category_list.html:6
-msgid "Categories"
-msgstr "Категорії"
-
-#: templates/base.html:28 templates/categories/rule_list.html:3
-msgid "Rules"
-msgstr "Правила"
-
-#: templates/base.html:38
-msgid "Log out"
-msgstr "Вийти"
-
-#: templates/base.html:48
-msgid "Add transaction"
-msgstr "Додати операцію"
-
-#: templates/categories/category_confirm_delete.html:3
-msgid "Delete category"
-msgstr "Видалити категорію"
-
+#: templates/accounts/account_confirm_delete.html:7
 #: templates/categories/category_confirm_delete.html:7
 #: templates/savings/goal_confirm_delete.html:7
 #, python-format
 msgid "Delete “%(name)s”?"
 msgstr "Видалити «%(name)s»?"
 
-#: templates/categories/category_confirm_delete.html:8
+#: templates/accounts/account_confirm_delete.html:8
 msgid ""
-"Its transactions stay and become uncategorized. Merchant rules pointing to "
-"it are removed."
+"Transactions stay, they just will not be linked to this account any more."
 msgstr ""
-"Її операції залишаться без категорії. Правила продавців, що на неї "
-"посилаються, буде видалено."
+"Операції залишаться, просто більше не будуть прив’язані до цього рахунку."
 
+#: templates/accounts/account_confirm_delete.html:10
+#: templates/accounts/account_form.html:12
 #: templates/categories/category_confirm_delete.html:10
 #: templates/categories/category_form.html:14
 #: templates/categories/rule_confirm_delete.html:10
@@ -398,6 +417,8 @@ msgstr ""
 msgid "Delete"
 msgstr "Видалити"
 
+#: templates/accounts/account_confirm_delete.html:11
+#: templates/accounts/account_form.html:11
 #: templates/categories/category_confirm_delete.html:11
 #: templates/categories/category_form.html:13
 #: templates/categories/rule_confirm_delete.html:11
@@ -411,6 +432,91 @@ msgstr "Видалити"
 msgid "Cancel"
 msgstr "Скасувати"
 
+#: templates/accounts/account_form.html:3
+#: templates/accounts/account_form.html:5
+#: templates/accounts/account_list.html:10
+msgid "New account"
+msgstr "Новий рахунок"
+
+#: templates/accounts/account_form.html:10
+#: templates/categories/category_form.html:12
+#: templates/categories/rule_form.html:10 templates/savings/entry_form.html:10
+#: templates/savings/goal_form.html:10
+#: templates/transactions/transaction_form.html:14
+msgid "Save"
+msgstr "Зберегти"
+
+#: templates/accounts/account_list.html:3
+#: templates/accounts/account_list.html:7 templates/base.html:26
+#: templates/dashboard/home.html:68
+msgid "Accounts"
+msgstr "Рахунки"
+
+#: templates/accounts/account_list.html:8
+#, python-format
+msgid "%(total)s on accounts in total"
+msgstr "Усього на рахунках %(total)s"
+
+#: templates/accounts/account_list.html:28
+msgid ""
+"No accounts yet. Add your card with its current balance, one account per "
+"currency."
+msgstr ""
+"Рахунків ще немає. Додайте картку з поточним залишком, окремий рахунок для "
+"кожної валюти."
+
+#: templates/accounts/account_list.html:31
+msgid ""
+"The balance starts from the amount you enter and then follows your "
+"transactions: expenses take money out, income adds it, savings deposits move"
+" it to a goal."
+msgstr ""
+"Залишок починається з указаної суми, а далі змінюється разом з операціями: "
+"витрати його зменшують, доходи збільшують, а поповнення цілей переносять "
+"гроші в заощадження."
+
+#: templates/base.html:24 templates/dashboard/home.html:3
+msgid "Overview"
+msgstr "Огляд"
+
+#: templates/base.html:25 templates/transactions/transaction_list.html:3
+msgid "Transactions"
+msgstr "Операції"
+
+#: templates/base.html:27 templates/savings/goal_list.html:3
+#: templates/savings/goal_list.html:7
+msgid "Savings"
+msgstr "Заощадження"
+
+#: templates/base.html:28 templates/categories/category_list.html:3
+#: templates/categories/category_list.html:6
+msgid "Categories"
+msgstr "Категорії"
+
+#: templates/base.html:29 templates/categories/rule_list.html:3
+msgid "Rules"
+msgstr "Правила"
+
+#: templates/base.html:39
+msgid "Log out"
+msgstr "Вийти"
+
+#: templates/base.html:49
+msgid "Add transaction"
+msgstr "Додати операцію"
+
+#: templates/categories/category_confirm_delete.html:3
+msgid "Delete category"
+msgstr "Видалити категорію"
+
+#: templates/categories/category_confirm_delete.html:8
+msgid ""
+"Its transactions stay and become uncategorized. Merchant rules pointing to "
+"it are removed."
+msgstr ""
+"Її операції залишаться без категорії. Правила продавців, що на неї "
+"посилаються, буде видалено."
+
 #: templates/categories/category_form.html:3
 msgid "Edit category"
 msgstr "Редагувати категорію"
@@ -420,13 +526,6 @@ msgstr "Редагувати категорію"
 #: templates/categories/category_list.html:7
 msgid "New category"
 msgstr "Нова категорія"
-
-#: templates/categories/category_form.html:12
-#: templates/categories/rule_form.html:10 templates/savings/entry_form.html:10
-#: templates/savings/goal_form.html:10
-#: templates/transactions/transaction_form.html:14
-msgid "Save"
-msgstr "Зберегти"
 
 #: templates/categories/category_list.html:19
 #, python-format
@@ -500,23 +599,35 @@ msgid "No expenses this month yet."
 msgstr "Цього місяця витрат ще немає."
 
 #: templates/dashboard/home.html:67
+msgid "Money now"
+msgstr "Гроші зараз"
+
+#: templates/dashboard/home.html:81
+msgid "In savings goals"
+msgstr "У цілях заощаджень"
+
+#: templates/dashboard/home.html:83
+msgid "Total"
+msgstr "Разом"
+
+#: templates/dashboard/home.html:91
 msgid "Savings goals"
 msgstr "Цілі заощаджень"
 
-#: templates/dashboard/home.html:68
+#: templates/dashboard/home.html:92
 msgid "All goals"
 msgstr "Усі цілі"
 
-#: templates/dashboard/home.html:78
+#: templates/dashboard/home.html:102
 msgid "Latest"
 msgstr "Останні"
 
-#: templates/dashboard/home.html:79
+#: templates/dashboard/home.html:103
 #, python-format
 msgid "All %(count)s"
 msgstr "Усі %(count)s"
 
-#: templates/dashboard/home.html:89
+#: templates/dashboard/home.html:113
 #, python-format
 msgid ""
 "Nothing here yet. Pay with Apple Pay or <a href=\"%(create_url)s\">add a "
@@ -821,6 +932,3 @@ msgstr "Продовжити"
 #: templates/users/login.html:14
 msgid "Spendlog · personal budget"
 msgstr "Spendlog · особистий бюджет"
-
-#~ msgid "Balance"
-#~ msgstr "Баланс"

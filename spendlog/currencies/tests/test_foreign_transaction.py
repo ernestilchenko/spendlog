@@ -24,6 +24,7 @@ class ForeignCurrencyTransactionTests(TestCase):
             'kind': 'expense',
             'amount': '12.50',
             'currency': 'EUR',
+            'account': '',
             'merchant': 'Cafe in Berlin',
             'category': get_category(self.user, 'Cafes & restaurants').pk,
             'occurred_at': timezone.localtime().strftime('%Y-%m-%dT%H:%M'),

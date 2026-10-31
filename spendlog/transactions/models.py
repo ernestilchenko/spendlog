@@ -6,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from spendlog.accounts.models import Account
 from spendlog.categories.models import Category
 from spendlog.core.choices import Currency, TransactionKind, TransactionSource
 from spendlog.core.models import TimeStampedModel
@@ -29,6 +30,15 @@ class Transaction(TimeStampedModel):
         related_name='transactions',
         verbose_name=_('category'),
     )
+    account = models.ForeignKey(
+        Account,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transactions',
+        verbose_name=_('account'),
+    )
+    account_amount = models.DecimalField(_('amount in account currency'), max_digits=14, decimal_places=2, null=True, blank=True)
     occurred_at = models.DateTimeField(_('date'), default=timezone.now)
     source = models.CharField(_('source'), max_length=20, choices=TransactionSource, default=TransactionSource.MANUAL)
     card = models.CharField(_('card'), max_length=80, blank=True)

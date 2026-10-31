@@ -3,6 +3,7 @@ from decimal import ROUND_UP, Decimal
 
 from django.utils import timezone
 
+from spendlog.accounts.services import assign_account
 from spendlog.currencies.services import apply_conversion
 
 CENT = Decimal('0.01')
@@ -65,6 +66,7 @@ def save_entry(form, goal):
     entry.user = goal.user
     entry.goal = goal
     apply_conversion(entry)
+    assign_account(entry, entry.account)
     if entry.is_withdrawal and entry.amount_pln > goal.entries.balance():
         raise NotEnoughSaved
     entry.save()

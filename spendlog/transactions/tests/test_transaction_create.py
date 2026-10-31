@@ -20,6 +20,7 @@ class TransactionCreateTests(TestCase):
             'kind': 'expense',
             'amount': '42.50',
             'currency': 'PLN',
+            'account': '',
             'merchant': 'Orlen',
             'category': '',
             'occurred_at': '2026-11-03T08:15',

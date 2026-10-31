@@ -17,6 +17,7 @@ class TransactionUpdateTests(TestCase):
             'kind': 'expense',
             'amount': '10.00',
             'currency': 'PLN',
+            'account': '',
             'merchant': 'Rossmann',
             'category': health.pk,
             'occurred_at': '2026-11-03T10:00',
