@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spendlog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-31 13:41+0100\n"
+"POT-Creation-Date: 2026-10-31 14:14+0100\n"
 "PO-Revision-Date: 2026-10-31 12:00+0100\n"
 "Last-Translator: Ernest Ilchenko <ernestilchenko@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -282,8 +282,8 @@ msgid "Entry deleted"
 msgstr "Wpis usunięty"
 
 #: spendlog/savings/messages.py:10
-msgid "There is not that much in this goal"
-msgstr "W tym celu nie ma aż tyle pieniędzy"
+msgid "There is not that much in this goal in this currency"
+msgstr "W tym celu nie ma aż tyle pieniędzy w tej walucie"
 
 #: spendlog/savings/models.py:20
 msgid "target in PLN"

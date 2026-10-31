@@ -7,4 +7,4 @@ class SavingsMessages:
     GOAL_DELETED = _('Goal deleted')
     ENTRY_CREATED = _('Saved')
     ENTRY_DELETED = _('Entry deleted')
-    NOT_ENOUGH = _('There is not that much in this goal')
+    NOT_ENOUGH = _('There is not that much in this goal in this currency')

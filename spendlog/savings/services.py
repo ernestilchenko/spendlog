@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from decimal import ROUND_UP, Decimal
+from decimal import ROUND_HALF_UP, ROUND_UP, Decimal
 
 from django.utils import timezone
 
 from spendlog.accounts.services import assign_account
-from spendlog.currencies.services import apply_conversion
+from spendlog.currencies.services import ExchangeRateUnavailable, apply_conversion, get_rate
 
 CENT = Decimal('0.01')
 
@@ -53,8 +53,21 @@ class GoalProgress:
         return bool(self.target) and self.saved >= self.target
 
 
+def current_value(entries):
+    today = timezone.localdate()
+    total = Decimal('0')
+    for currency, amount in entries.balance_by_currency().items():
+        try:
+            rate = get_rate(currency, today)
+        except ExchangeRateUnavailable:
+            total += entries.filter(currency=currency).balance()
+            continue
+        total += (amount * rate).quantize(CENT, rounding=ROUND_HALF_UP)
+    return total
+
+
 def goal_progress(goal):
-    return GoalProgress(goal, goal.entries.balance())
+    return GoalProgress(goal, current_value(goal.entries.all()))
 
 
 def active_goal_progress(user):
@@ -67,7 +80,7 @@ def save_entry(form, goal):
     entry.goal = goal
     apply_conversion(entry)
     assign_account(entry, entry.account)
-    if entry.is_withdrawal and entry.amount_pln > goal.entries.balance():
+    if entry.is_withdrawal and entry.amount > goal.entries.filter(currency=entry.currency).balance_by_currency().get(entry.currency, Decimal('0')):
         raise NotEnoughSaved
     entry.save()
     return entry
