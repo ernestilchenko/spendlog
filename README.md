@@ -11,9 +11,11 @@ Django 6 + Django templates, PostgreSQL. Project layout follows *Two Scoops of D
 | `core` | `TimeStampedModel`, shared choices, month helpers, money formatting |
 | `users` | Email-based custom user, login/logout. New users get default categories |
 | `categories` | Categories with optional monthly budgets, merchant rules, auto-categorization (`services.categorize_expense`, `ai.suggest_category_name`) |
-| `transactions` | Expenses and income: list with month/type/category filters, create, edit, delete |
+| `currencies` | NBP (National Bank of Poland) exchange rates, cached per day; converts every amount to PLN |
+| `transactions` | Expenses and income in any supported currency: list with month/type/category filters, create, edit, delete |
+| `savings` | Savings goals (car, apartment, cushion) with target, deadline, deposits and withdrawals, monthly amount needed |
 | `integrations` | `POST /api/apple-pay/` for the Shortcut, API token management |
-| `dashboard` | Month overview: totals, budget left, spending by category, latest transactions |
+| `dashboard` | Month overview: spent, income, saved, left, budget left, spending by category, goals, latest transactions |
 
 ## Local setup
 
@@ -43,6 +45,14 @@ DJANGO_SETTINGS_MODULE=config.settings.test .venv/bin/python manage.py test
 | `ANTHROPIC_API_KEY` | optional. Without it, unknown merchants go to `Other` |
 | `CATEGORIZER_MODEL` | defaults to `claude-opus-5` |
 
+## Currencies
+
+Supported: PLN, EUR, USD, UAH, GBP, CHF, CZK. Each transaction and savings entry keeps the original amount and currency plus `amount_pln` and the NBP table A mid rate of that day (or the last published day before it). All totals use `amount_pln`. If NBP is unreachable, the last stored rate is used; with no stored rate at all the form shows an error and the Apple Pay endpoint answers 503.
+
+## Languages
+
+English, Polish and Ukrainian (`locale/`). Default category names are stored in English and translated when shown.
+
 ## Categorization
 
 1. Merchant rules: the longest rule whose text is contained in the merchant name wins.
@@ -57,7 +67,7 @@ Create a token on the **Apple Pay** page, then on the iPhone: Shortcuts → Auto
 
 - URL: `https://<your domain>/api/apple-pay/`, method `POST`
 - Header `Authorization: Token <token>`
-- JSON body: `amount` = Amount, `merchant` = Merchant, `card` = Card or Pass
+- JSON body: `amount` = Amount, `merchant` = Merchant, `card` = Card or Pass. The currency is detected from the amount text (`€12,50`, `200 ₴`, `PLN 18.50`) or can be sent as `currency`.
 
 The response has a `message` field (`Żabka · 18,50 zł → Groceries`) that can be shown with **Show Notification**. Only tap-to-pay with the iPhone triggers the automation; add physical card, BLIK and transfers manually.
 

@@ -306,7 +306,7 @@ pre {
 
 @media (min-width: 640px) {
   .stats {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
 
   .stats-compact {
@@ -334,6 +334,21 @@ pre {
 
 .bar-row + .bar-row {
   margin-top: 16px;
+}
+
+.bar-row small {
+  display: block;
+  margin-top: 6px;
+}
+
+.big-number {
+  font-family: var(--serif);
+  font-size: 44px;
+  line-height: 1.1;
+}
+
+a.bar-label:hover {
+  color: var(--text);
 }
 
 .bar-label {
@@ -396,6 +411,17 @@ pre {
 .tx-amount {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.tx-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.tx-converted {
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .tx-amount.positive {
@@ -702,4 +728,16 @@ select:focus {
 
 .steps b {
   font-weight: 600;
+}
+
+.big-number {
+  margin: 0 0 4px;
+}
+
+.big-number + .muted {
+  margin: 0 0 14px;
+}
+
+.stats-goal {
+  margin: 20px 0 8px;
 }

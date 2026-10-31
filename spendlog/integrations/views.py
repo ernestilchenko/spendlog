@@ -6,10 +6,13 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
+from spendlog.currencies.messages import CurrencyMessages
+from spendlog.currencies.services import ExchangeRateUnavailable
+
 from .messages import ApplePayMessages
 from .models import ApiToken
 from .services import build_payment_message, issue_token, record_apple_pay_payment
-from .utils import get_user_by_token, parse_amount, read_payload
+from .utils import detect_currency, get_user_by_token, parse_amount, read_payload
 
 NEW_TOKEN_SESSION_KEY = 'new_api_token'
 
@@ -21,15 +24,20 @@ def apple_pay_ingest(request):
     if user is None:
         return JsonResponse({'ok': False, 'message': ApplePayMessages.INVALID_TOKEN}, status=401)
     payload = read_payload(request)
-    amount = parse_amount(payload.get('amount', ''))
+    raw_amount = payload.get('amount', '')
+    amount = parse_amount(raw_amount)
     if amount is None:
         return JsonResponse({'ok': False, 'message': ApplePayMessages.INVALID_AMOUNT}, status=400)
-    transaction = record_apple_pay_payment(
-        user,
-        amount,
-        str(payload.get('merchant', '')),
-        str(payload.get('card', '')),
-    )
+    try:
+        transaction = record_apple_pay_payment(
+            user,
+            amount,
+            detect_currency(raw_amount, payload.get('currency', '')),
+            str(payload.get('merchant', '')),
+            str(payload.get('card', '')),
+        )
+    except ExchangeRateUnavailable:
+        return JsonResponse({'ok': False, 'message': CurrencyMessages.RATE_UNAVAILABLE}, status=503)
     return JsonResponse({'ok': True, 'id': transaction.pk, 'message': build_payment_message(transaction)}, status=201)
 
 

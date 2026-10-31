@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% if goal %}{% translate 'Edit goal' %}{% else %}{% translate 'New goal' %}{% endif %}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% if goal %}{{ goal.name }}{% else %}{% translate 'New goal' %}{% endif %}</h1></div>
+<form method="post" class="card form">
+  {% csrf_token %}
+  {% include 'partials/_form.html' %}
+  <div class="form-actions">
+    <button type="submit" class="button button-primary">{% translate 'Save' %}</button>
+    <a href="{% if goal %}{% url 'savings:goal_detail' goal.pk %}{% else %}{% url 'savings:goal_list' %}{% endif %}" class="button">{% translate 'Cancel' %}</a>
+    {% if goal %}<a href="{% url 'savings:goal_delete' goal.pk %}" class="button button-danger push-right">{% translate 'Delete' %}</a>{% endif %}
+  </div>
+</form>
+{% endblock %}

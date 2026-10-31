@@ -5,29 +5,27 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Spendlog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-31 11:38+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2026-10-31 12:05+0100\n"
+"PO-Revision-Date: 2026-10-31 12:00+0100\n"
+"Last-Translator: Ernest Ilchenko <ernestilchenko@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
-"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
-"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
-"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
-#: config/settings/base.py:104
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: config/settings/base.py:106
 msgid "English"
 msgstr "Англійська"
 
-#: config/settings/base.py:105
+#: config/settings/base.py:107
 msgid "Polish"
 msgstr "Польська"
 
-#: config/settings/base.py:106
+#: config/settings/base.py:108
 msgid "Ukrainian"
 msgstr "Українська"
 
@@ -59,15 +57,16 @@ msgstr "Правило видалено"
 msgid "A rule for this merchant already exists"
 msgstr "Правило для цього продавця вже існує"
 
-#: spendlog/categories/models.py:12
+#: spendlog/categories/models.py:12 spendlog/savings/models.py:17
 msgid "name"
 msgstr "назва"
 
-#: spendlog/categories/models.py:13 spendlog/transactions/models.py:18
+#: spendlog/categories/models.py:13 spendlog/savings/models.py:42
+#: spendlog/transactions/models.py:18
 msgid "type"
 msgstr "тип"
 
-#: spendlog/categories/models.py:14
+#: spendlog/categories/models.py:14 spendlog/savings/models.py:27
 msgid "color"
 msgstr "колір"
 
@@ -76,7 +75,7 @@ msgid "monthly budget"
 msgstr "місячний бюджет"
 
 #: spendlog/categories/models.py:19 spendlog/categories/models.py:36
-#: spendlog/transactions/models.py:27
+#: spendlog/transactions/models.py:30
 msgid "category"
 msgstr "категорія"
 
@@ -169,7 +168,34 @@ msgstr "Дохід"
 msgid "Manual"
 msgstr "Вручну"
 
-#: spendlog/dashboard/services.py:46 spendlog/integrations/messages.py:7
+#: spendlog/core/choices.py:26
+msgid "Deposit"
+msgstr "Поповнення"
+
+#: spendlog/core/choices.py:27
+msgid "Withdrawal"
+msgstr "Зняття"
+
+#: spendlog/currencies/messages.py:5
+msgid "Could not get the exchange rate. Try again in a minute or use PLN."
+msgstr ""
+"Не вдалося отримати курс валюти. Спробуйте за хвилину або використайте PLN."
+
+#: spendlog/currencies/models.py:8 spendlog/savings/models.py:44
+#: spendlog/transactions/models.py:20
+msgid "currency"
+msgstr "валюта"
+
+#: spendlog/currencies/models.py:9 spendlog/savings/models.py:47
+#: spendlog/transactions/models.py:32
+msgid "date"
+msgstr "дата"
+
+#: spendlog/currencies/models.py:10
+msgid "rate to PLN"
+msgstr "курс до PLN"
+
+#: spendlog/dashboard/services.py:47 spendlog/integrations/messages.py:7
 #: templates/partials/_transaction_row.html:7
 #: templates/transactions/transaction_list.html:17
 msgid "Uncategorized"
@@ -185,7 +211,80 @@ msgstr "Не вдалося прочитати суму платежу"
 
 #: spendlog/integrations/messages.py:9
 msgid "New token created. Copy it now: it will not be shown again"
-msgstr "Створено новий токен. Скопіюйте його зараз: більше його не буде показано"
+msgstr ""
+"Створено новий токен. Скопіюйте його зараз: більше його не буде показано"
+
+#: spendlog/savings/messages.py:5
+msgid "Goal created"
+msgstr "Ціль створено"
+
+#: spendlog/savings/messages.py:6
+msgid "Goal saved"
+msgstr "Ціль збережено"
+
+#: spendlog/savings/messages.py:7
+msgid "Goal deleted"
+msgstr "Ціль видалено"
+
+#: spendlog/savings/messages.py:8 templates/dashboard/home.html:17
+msgid "Saved"
+msgstr "Відкладено"
+
+#: spendlog/savings/messages.py:9
+msgid "Entry deleted"
+msgstr "Запис видалено"
+
+#: spendlog/savings/messages.py:10
+msgid "There is not that much in this goal"
+msgstr "У цій цілі немає стільки грошей"
+
+#: spendlog/savings/models.py:19
+msgid "target in PLN"
+msgstr "ціль у PLN"
+
+#: spendlog/savings/models.py:26
+msgid "target date"
+msgstr "термін"
+
+#: spendlog/savings/models.py:28
+msgid "archived"
+msgstr "в архіві"
+
+#: spendlog/savings/models.py:32
+msgid "savings goal"
+msgstr "ціль заощаджень"
+
+#: spendlog/savings/models.py:33
+msgid "savings goals"
+msgstr "цілі заощаджень"
+
+#: spendlog/savings/models.py:41
+msgid "goal"
+msgstr "ціль"
+
+#: spendlog/savings/models.py:43 spendlog/transactions/models.py:19
+msgid "amount"
+msgstr "сума"
+
+#: spendlog/savings/models.py:45 spendlog/transactions/models.py:21
+msgid "amount in PLN"
+msgstr "сума в PLN"
+
+#: spendlog/savings/models.py:46 spendlog/transactions/models.py:22
+msgid "exchange rate"
+msgstr "курс обміну"
+
+#: spendlog/savings/models.py:48 spendlog/transactions/models.py:35
+msgid "note"
+msgstr "нотатка"
+
+#: spendlog/savings/models.py:54
+msgid "savings entry"
+msgstr "запис заощаджень"
+
+#: spendlog/savings/models.py:55
+msgid "savings entries"
+msgstr "записи заощаджень"
 
 #: spendlog/transactions/forms.py:11
 msgid "Always use this category for this merchant"
@@ -211,35 +310,23 @@ msgstr "Операцію видалено"
 msgid "This category does not match the transaction type"
 msgstr "Ця категорія не відповідає типу операції"
 
-#: spendlog/transactions/models.py:19
-msgid "amount"
-msgstr "сума"
-
-#: spendlog/transactions/models.py:20
+#: spendlog/transactions/models.py:23
 msgid "merchant"
 msgstr "продавець"
 
-#: spendlog/transactions/models.py:29
-msgid "date"
-msgstr "дата"
-
-#: spendlog/transactions/models.py:30
+#: spendlog/transactions/models.py:33
 msgid "source"
 msgstr "джерело"
 
-#: spendlog/transactions/models.py:31
+#: spendlog/transactions/models.py:34
 msgid "card"
 msgstr "картка"
 
-#: spendlog/transactions/models.py:32
-msgid "note"
-msgstr "нотатка"
-
-#: spendlog/transactions/models.py:38
+#: spendlog/transactions/models.py:41
 msgid "transaction"
 msgstr "операція"
 
-#: spendlog/transactions/models.py:39
+#: spendlog/transactions/models.py:42
 msgid "transactions"
 msgstr "операції"
 
@@ -259,20 +346,25 @@ msgstr "Огляд"
 msgid "Transactions"
 msgstr "Операції"
 
-#: templates/base.html:26 templates/categories/category_list.html:3
+#: templates/base.html:26 templates/savings/goal_list.html:3
+#: templates/savings/goal_list.html:7
+msgid "Savings"
+msgstr "Заощадження"
+
+#: templates/base.html:27 templates/categories/category_list.html:3
 #: templates/categories/category_list.html:6
 msgid "Categories"
 msgstr "Категорії"
 
-#: templates/base.html:27 templates/categories/rule_list.html:3
+#: templates/base.html:28 templates/categories/rule_list.html:3
 msgid "Rules"
 msgstr "Правила"
 
-#: templates/base.html:37
+#: templates/base.html:38
 msgid "Log out"
 msgstr "Вийти"
 
-#: templates/base.html:47
+#: templates/base.html:48
 msgid "Add transaction"
 msgstr "Додати операцію"
 
@@ -281,6 +373,7 @@ msgid "Delete category"
 msgstr "Видалити категорію"
 
 #: templates/categories/category_confirm_delete.html:7
+#: templates/savings/goal_confirm_delete.html:7
 #, python-format
 msgid "Delete “%(name)s”?"
 msgstr "Видалити «%(name)s»?"
@@ -289,14 +382,19 @@ msgstr "Видалити «%(name)s»?"
 msgid ""
 "Its transactions stay and become uncategorized. Merchant rules pointing to "
 "it are removed."
-msgstr "Її операції залишаться без категорії. Правила продавців, що на неї посилаються, буде видалено."
+msgstr ""
+"Її операції залишаться без категорії. Правила продавців, що на неї "
+"посилаються, буде видалено."
 
 #: templates/categories/category_confirm_delete.html:10
 #: templates/categories/category_form.html:14
 #: templates/categories/rule_confirm_delete.html:10
 #: templates/categories/rule_list.html:16
+#: templates/savings/entry_confirm_delete.html:10
+#: templates/savings/goal_confirm_delete.html:10
+#: templates/savings/goal_detail.html:38 templates/savings/goal_form.html:12
 #: templates/transactions/transaction_confirm_delete.html:10
-#: templates/transactions/transaction_form.html:15
+#: templates/transactions/transaction_form.html:16
 msgid "Delete"
 msgstr "Видалити"
 
@@ -304,8 +402,12 @@ msgstr "Видалити"
 #: templates/categories/category_form.html:13
 #: templates/categories/rule_confirm_delete.html:11
 #: templates/categories/rule_form.html:11
+#: templates/savings/entry_confirm_delete.html:11
+#: templates/savings/entry_form.html:11
+#: templates/savings/goal_confirm_delete.html:11
+#: templates/savings/goal_form.html:11
 #: templates/transactions/transaction_confirm_delete.html:11
-#: templates/transactions/transaction_form.html:14
+#: templates/transactions/transaction_form.html:15
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -320,8 +422,9 @@ msgid "New category"
 msgstr "Нова категорія"
 
 #: templates/categories/category_form.html:12
-#: templates/categories/rule_form.html:10
-#: templates/transactions/transaction_form.html:13
+#: templates/categories/rule_form.html:10 templates/savings/entry_form.html:10
+#: templates/savings/goal_form.html:10
+#: templates/transactions/transaction_form.html:14
 msgid "Save"
 msgstr "Зберегти"
 
@@ -352,7 +455,10 @@ msgid ""
 "If the merchant name contains the text, the payment goes to that category. "
 "Rules are also learned automatically when Claude picks a category or when "
 "you tick “Always use this category”."
-msgstr "Якщо назва продавця містить цей текст, платіж потрапляє в цю категорію. Правила також створюються автоматично, коли Claude обирає категорію або коли ви позначаєте «Завжди використовувати цю категорію»."
+msgstr ""
+"Якщо назва продавця містить цей текст, платіж потрапляє в цю категорію. "
+"Правила також створюються автоматично, коли Claude обирає категорію або коли"
+" ви позначаєте «Завжди використовувати цю категорію»."
 
 #: templates/categories/rule_list.html:21
 msgid "No rules yet."
@@ -363,47 +469,61 @@ msgstr "Правил поки немає."
 msgid "Spent"
 msgstr "Витрачено"
 
-#: templates/dashboard/home.html:17
-msgid "Balance"
-msgstr "Баланс"
+#: templates/dashboard/home.html:21
+msgid "Left"
+msgstr "Залишилось"
 
-#: templates/dashboard/home.html:22
+#: templates/dashboard/home.html:23
+msgid "income − spent − saved"
+msgstr "дохід − витрати − відкладене"
+
+#: templates/dashboard/home.html:27
 msgid "Budget left"
 msgstr "Залишок бюджету"
 
-#: templates/dashboard/home.html:24
+#: templates/dashboard/home.html:29
 #, python-format
 msgid "of %(total)s"
 msgstr "з %(total)s"
 
-#: templates/dashboard/home.html:31
+#: templates/dashboard/home.html:36
 msgid "By category"
 msgstr "За категоріями"
 
-#: templates/dashboard/home.html:50
+#: templates/dashboard/home.html:55
 #, python-format
 msgid "Over budget by %(amount)s"
 msgstr "Перевищено бюджет на %(amount)s"
 
-#: templates/dashboard/home.html:55
+#: templates/dashboard/home.html:60
 msgid "No expenses this month yet."
 msgstr "Цього місяця витрат ще немає."
 
-#: templates/dashboard/home.html:61
+#: templates/dashboard/home.html:67
+msgid "Savings goals"
+msgstr "Цілі заощаджень"
+
+#: templates/dashboard/home.html:68
+msgid "All goals"
+msgstr "Усі цілі"
+
+#: templates/dashboard/home.html:78
 msgid "Latest"
 msgstr "Останні"
 
-#: templates/dashboard/home.html:62
+#: templates/dashboard/home.html:79
 #, python-format
 msgid "All %(count)s"
 msgstr "Усі %(count)s"
 
-#: templates/dashboard/home.html:72
+#: templates/dashboard/home.html:89
 #, python-format
 msgid ""
 "Nothing here yet. Pay with Apple Pay or <a href=\"%(create_url)s\">add a "
 "transaction</a>."
-msgstr "Поки що порожньо. Оплатіть через Apple Pay або <a href=\"%(create_url)s\">додайте операцію</a>."
+msgstr ""
+"Поки що порожньо. Оплатіть через Apple Pay або <a "
+"href=\"%(create_url)s\">додайте операцію</a>."
 
 #: templates/integrations/apple_pay_setup.html:5
 msgid "Apple Pay sync"
@@ -411,9 +531,11 @@ msgstr "Синхронізація Apple Pay"
 
 #: templates/integrations/apple_pay_setup.html:6
 msgid ""
-"An iPhone Shortcuts automation sends every tap-to-pay payment here. Spendlog "
-"saves it and picks a category automatically."
-msgstr "Автоматизація у «Швидких командах» на iPhone надсилає сюди кожну безконтактну оплату. Spendlog зберігає її та сам обирає категорію."
+"An iPhone Shortcuts automation sends every tap-to-pay payment here. Spendlog"
+" saves it and picks a category automatically."
+msgstr ""
+"Автоматизація у «Швидких командах» на iPhone надсилає сюди кожну "
+"безконтактну оплату. Spendlog зберігає її та сам обирає категорію."
 
 #: templates/integrations/apple_pay_setup.html:9
 msgid "1. API token"
@@ -460,13 +582,17 @@ msgstr "2. Автоматизація у «Швидких командах» н�
 #: templates/integrations/apple_pay_setup.html:30
 msgid ""
 "Open <b>Shortcuts</b> → <b>Automation</b> → <b>+</b> → <b>Transaction</b>."
-msgstr "Відкрийте <b>Швидкі команди</b> → <b>Автоматизація</b> → <b>+</b> → <b>Транзакція</b>."
+msgstr ""
+"Відкрийте <b>Швидкі команди</b> → <b>Автоматизація</b> → <b>+</b> → "
+"<b>Транзакція</b>."
 
 #: templates/integrations/apple_pay_setup.html:31
 msgid ""
 "Select your cards in Wallet, choose <b>Run Immediately</b>, tap <b>Next</b> "
 "→ <b>New Blank Automation</b>."
-msgstr "Виберіть картки в Wallet, увімкніть <b>Запускати одразу</b>, торкніться <b>Далі</b> → <b>Нова порожня автоматизація</b>."
+msgstr ""
+"Виберіть картки в Wallet, увімкніть <b>Запускати одразу</b>, торкніться "
+"<b>Далі</b> → <b>Нова порожня автоматизація</b>."
 
 #: templates/integrations/apple_pay_setup.html:32
 msgid "Add the action <b>Get Contents of URL</b>:"
@@ -489,24 +615,54 @@ msgid ""
 "Request Body: <b>JSON</b> with fields: <code>amount</code> → Shortcut Input "
 "<i>Amount</i>, <code>merchant</code> → <i>Merchant</i>, <code>card</code> → "
 "<i>Card or Pass</i>"
-msgstr "Тіло запиту: <b>JSON</b> з полями: <code>amount</code> → вхід команди <i>Сума</i>, <code>merchant</code> → <i>Продавець</i>, <code>card</code> → <i>Картка або перепустка</i>"
+msgstr ""
+"Тіло запиту: <b>JSON</b> з полями: <code>amount</code> → вхід команди "
+"<i>Сума</i>, <code>merchant</code> → <i>Продавець</i>, <code>card</code> → "
+"<i>Картка або перепустка</i>"
 
 #: templates/integrations/apple_pay_setup.html:40
 msgid ""
 "Optional: add <b>Get Dictionary Value</b> for key <code>message</code> and "
 "<b>Show Notification</b> with it, to see “Żabka · 18,50 zł → Groceries” "
 "after each payment."
-msgstr "Необов’язково: додайте <b>Отримати значення словника</b> для ключа <code>message</code> і <b>Показати сповіщення</b>, щоб після кожної оплати бачити «Żabka · 18,50 zł → Продукти»."
+msgstr ""
+"Необов’язково: додайте <b>Отримати значення словника</b> для ключа "
+"<code>message</code> і <b>Показати сповіщення</b>, щоб після кожної оплати "
+"бачити «Żabka · 18,50 zł → Продукти»."
 
 #: templates/integrations/apple_pay_setup.html:42
 msgid ""
-"Only tap-to-pay with the iPhone triggers the automation. Physical card, BLIK "
-"and transfers need to be added manually with the + button."
-msgstr "Автоматизацію запускає лише безконтактна оплата iPhone. Фізичну картку, BLIK і перекази додавайте вручну кнопкою +."
+"Payments abroad are recognised by the currency sign in the amount and "
+"converted to PLN at the NBP rate of that day."
+msgstr ""
+"Оплати за кордоном розпізнаються за символом валюти в сумі та "
+"перераховуються в PLN за курсом NBP на цей день."
 
-#: templates/integrations/apple_pay_setup.html:46
+#: templates/integrations/apple_pay_setup.html:43
+msgid ""
+"Only tap-to-pay with the iPhone triggers the automation. Physical card, BLIK"
+" and transfers need to be added manually with the + button."
+msgstr ""
+"Автоматизацію запускає лише безконтактна оплата iPhone. Фізичну картку, BLIK"
+" і перекази додавайте вручну кнопкою +."
+
+#: templates/integrations/apple_pay_setup.html:47
 msgid "Test from a terminal"
 msgstr "Перевірка з термінала"
+
+#: templates/partials/_goal_progress.html:12
+msgid "Goal reached"
+msgstr "Ціль досягнуто"
+
+#: templates/partials/_goal_progress.html:12
+#, python-format
+msgid "%(percent)s%% · %(remaining)s to go"
+msgstr "%(percent)s%% · залишилось %(remaining)s"
+
+#: templates/partials/_goal_progress.html:12
+#, python-format
+msgid "%(amount)s a month to make it by %(date)s"
+msgstr "%(amount)s на місяць, щоб встигнути до %(date)s"
 
 #: templates/partials/_month_nav.html:3
 msgid "Previous month"
@@ -515,6 +671,92 @@ msgstr "Попередній місяць"
 #: templates/partials/_month_nav.html:5
 msgid "Next month"
 msgstr "Наступний місяць"
+
+#: templates/savings/entry_confirm_delete.html:3
+msgid "Delete entry"
+msgstr "Видалити запис"
+
+#: templates/savings/entry_confirm_delete.html:7
+msgid "Delete this entry?"
+msgstr "Видалити цей запис?"
+
+#: templates/savings/goal_confirm_delete.html:3
+msgid "Delete goal"
+msgstr "Видалити ціль"
+
+#: templates/savings/goal_confirm_delete.html:8
+msgid "The whole history of this goal will be deleted too."
+msgstr "Уся історія цієї цілі також буде видалена."
+
+#: templates/savings/goal_detail.html:7
+msgid "Edit"
+msgstr "Редагувати"
+
+#: templates/savings/goal_detail.html:13
+#, python-format
+msgid "of %(target)s"
+msgstr "з %(target)s"
+
+#: templates/savings/goal_detail.html:13
+#, python-format
+msgid "by %(date)s"
+msgstr "до %(date)s"
+
+#: templates/savings/goal_detail.html:16
+msgid "Progress"
+msgstr "Прогрес"
+
+#: templates/savings/goal_detail.html:17
+msgid "To go"
+msgstr "Залишилось"
+
+#: templates/savings/goal_detail.html:19
+msgid "Needed per month"
+msgstr "Потрібно на місяць"
+
+#: templates/savings/goal_detail.html:20
+#, python-format
+msgid "%(months)s month left"
+msgid_plural "%(months)s months left"
+msgstr[0] "Залишився %(months)s місяць"
+msgstr[1] "Залишилось %(months)s місяці"
+msgstr[2] "Залишилось %(months)s місяців"
+msgstr[3] "Залишилось %(months)s місяця"
+
+#: templates/savings/goal_detail.html:25
+msgid "Put money aside"
+msgstr "Відкласти гроші"
+
+#: templates/savings/goal_detail.html:26
+msgid "Take out"
+msgstr "Зняти"
+
+#: templates/savings/goal_detail.html:31
+msgid "History"
+msgstr "Історія"
+
+#: templates/savings/goal_detail.html:48
+msgid "Nothing saved here yet."
+msgstr "Тут ще нічого не відкладено."
+
+#: templates/savings/goal_form.html:3
+msgid "Edit goal"
+msgstr "Редагувати ціль"
+
+#: templates/savings/goal_form.html:3 templates/savings/goal_form.html:5
+#: templates/savings/goal_list.html:10
+msgid "New goal"
+msgstr "Нова ціль"
+
+#: templates/savings/goal_list.html:8
+#, python-format
+msgid "%(total)s put aside in total"
+msgstr "Усього відкладено %(total)s"
+
+#: templates/savings/goal_list.html:18
+msgid "No goals yet. Create one for a car, an apartment or a safety cushion."
+msgstr ""
+"Цілей ще немає. Створіть ціль на машину, квартиру або фінансову подушку."
 
 #: templates/transactions/transaction_confirm_delete.html:3
 msgid "Delete transaction"
@@ -535,6 +777,11 @@ msgid "New transaction"
 msgstr "Нова операція"
 
 #: templates/transactions/transaction_form.html:8
+#, python-format
+msgid "Counted as %(amount)s at the NBP rate %(rate)s PLN per %(currency)s"
+msgstr "Враховано як %(amount)s за курсом NBP %(rate)s PLN за %(currency)s"
+
+#: templates/transactions/transaction_form.html:9
 #, python-format
 msgid "Paid with %(card)s via %(source)s"
 msgstr "Оплачено карткою %(card)s через %(source)s"
@@ -574,3 +821,6 @@ msgstr "Продовжити"
 #: templates/users/login.html:14
 msgid "Spendlog · personal budget"
 msgstr "Spendlog · особистий бюджет"
+
+#~ msgid "Balance"
+#~ msgstr "Баланс"

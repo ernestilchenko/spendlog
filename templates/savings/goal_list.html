@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Savings' %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% translate 'Savings' %}</h1>
+    <p class="muted">{% blocktranslate with total=total_saved|money %}{{ total }} put aside in total{% endblocktranslate %}</p>
+  </div>
+  <a href="{% url 'savings:goal_create' %}" class="button button-primary">{% translate 'New goal' %}</a>
+</div>
+<section class="card">
+  {% if progress_list %}
+  <ul class="bars">
+    {% for item in progress_list %}{% include 'partials/_goal_progress.html' %}{% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">{% translate 'No goals yet. Create one for a car, an apartment or a safety cushion.' %}</p>
+  {% endif %}
+</section>
+{% endblock %}

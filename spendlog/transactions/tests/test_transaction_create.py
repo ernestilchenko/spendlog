@@ -19,6 +19,7 @@ class TransactionCreateTests(TestCase):
         data = {
             'kind': 'expense',
             'amount': '42.50',
+            'currency': 'PLN',
             'merchant': 'Orlen',
             'category': '',
             'occurred_at': '2026-11-03T08:15',

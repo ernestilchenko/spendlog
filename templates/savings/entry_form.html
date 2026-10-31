@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{{ goal.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{{ goal.name }}</h1></div>
+<form method="post" class="card form">
+  {% csrf_token %}
+  {% include 'partials/_form.html' %}
+  <div class="form-actions">
+    <button type="submit" class="button button-primary">{% translate 'Save' %}</button>
+    <a href="{% url 'savings:goal_detail' goal.pk %}" class="button">{% translate 'Cancel' %}</a>
+  </div>
+</form>
+{% endblock %}

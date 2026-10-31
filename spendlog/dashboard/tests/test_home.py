@@ -7,6 +7,7 @@ from django.utils import timezone
 
 from spendlog.core.choices import TransactionKind
 from spendlog.core.testing import create_transaction, create_user, get_category
+from spendlog.savings.models import SavingsGoal
 
 
 class DashboardHomeTests(TestCase):
@@ -27,6 +28,7 @@ class DashboardHomeTests(TestCase):
         self.assertEqual(response.context['expense'], Decimal('50.00'))
         self.assertEqual(response.context['income'], Decimal('5000.00'))
         self.assertEqual(response.context['balance'], Decimal('4950.00'))
+        self.assertEqual(response.context['saved'], Decimal('0'))
         self.assertEqual(response.context['budget_left'], Decimal('70.00'))
         names = [row.name for row in response.context['category_rows']]
         self.assertEqual(names, ['Groceries', 'Uncategorized'])
@@ -45,3 +47,14 @@ class DashboardHomeTests(TestCase):
         create_transaction(create_user('other@example.com'), '77.00')
         response = self.client.get(self.url)
         self.assertEqual(response.context['transaction_count'], 0)
+
+    def test_savings_are_not_spending(self):
+        create_transaction(self.user, '5000.00', kind=TransactionKind.INCOME, category=get_category(self.user, 'Salary'))
+        create_transaction(self.user, '1000.00', category=get_category(self.user, 'Groceries'))
+        goal = SavingsGoal.objects.create(user=self.user, name='Car', target_amount=Decimal('40000'))
+        goal.entries.create(user=self.user, amount=Decimal('1500'), amount_pln=Decimal('1500'))
+        response = self.client.get(self.url)
+        self.assertEqual(response.context['expense'], Decimal('1000.00'))
+        self.assertEqual(response.context['saved'], Decimal('1500'))
+        self.assertEqual(response.context['balance'], Decimal('2500.00'))
+        self.assertEqual([item.goal.name for item in response.context['goals']], ['Car'])

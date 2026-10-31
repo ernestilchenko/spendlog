@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{{ goal.name }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1><span class="dot" style="background: {{ goal.color }}"></span>{{ goal.name }}</h1>
+  <a href="{% url 'savings:goal_update' goal.pk %}" class="button">{% translate 'Edit' %}</a>
+</div>
+
+<section class="card">
+  <p class="big-number">{{ progress.saved|money }}</p>
+  {% if progress.target %}
+  <p class="muted">{% blocktranslate with target=progress.target|money %}of {{ target }}{% endblocktranslate %}{% if goal.target_date %} · {% blocktranslate with date=goal.target_date|date:'j M Y' %}by {{ date }}{% endblocktranslate %}{% endif %}</p>
+  <div class="bar-track"><div class="bar-fill" style="width: {{ progress.percent }}%; background: {{ goal.color }}"></div></div>
+  <section class="stats stats-goal">
+    <div class="stat"><span class="stat-label">{% translate 'Progress' %}</span><span class="stat-value">{{ progress.percent }}%</span></div>
+    <div class="stat"><span class="stat-label">{% translate 'To go' %}</span><span class="stat-value">{{ progress.remaining|money }}</span></div>
+    {% if progress.monthly_needed %}
+    <div class="stat"><span class="stat-label">{% translate 'Needed per month' %}</span><span class="stat-value">{{ progress.monthly_needed|money }}</span>
+      <span class="stat-note">{% blocktranslate count months=progress.months_left %}{{ months }} month left{% plural %}{{ months }} months left{% endblocktranslate %}</span></div>
+    {% endif %}
+  </section>
+  {% endif %}
+  <div class="form-actions">
+    <a href="{% url 'savings:entry_create' goal.pk %}" class="button button-primary">{% translate 'Put money aside' %}</a>
+    <a href="{% url 'savings:entry_create' goal.pk %}?kind=withdrawal" class="button">{% translate 'Take out' %}</a>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>{% translate 'History' %}</h2></div>
+  {% if entries %}
+  <ul class="tx-list">
+    {% for entry in entries %}
+    <li class="tx">
+      <div class="tx-main">
+        <span class="tx-title">{{ entry.get_kind_display }}{% if entry.note %} · {{ entry.note }}{% endif %}</span>
+        <span class="tx-meta">{{ entry.occurred_at|date:'j M Y, H:i' }} · <a href="{% url 'savings:entry_delete' entry.pk %}">{% translate 'Delete' %}</a></span>
+      </div>
+      <span class="tx-amount {% if not entry.is_withdrawal %}positive{% endif %}">
+        {% if entry.is_withdrawal %}−{% else %}+{% endif %}{{ entry.amount|money:entry.currency }}
+        {% if entry.is_foreign %}<small class="tx-converted">≈ {{ entry.amount_pln|money }}</small>{% endif %}
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">{% translate 'Nothing saved here yet.' %}</p>
+  {% endif %}
+</section>
+{% endblock %}

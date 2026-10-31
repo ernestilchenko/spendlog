@@ -16,6 +16,7 @@ class TransactionUpdateTests(TestCase):
         response = self.client.post(self.url, {
             'kind': 'expense',
             'amount': '10.00',
+            'currency': 'PLN',
             'merchant': 'Rossmann',
             'category': health.pk,
             'occurred_at': '2026-11-03T10:00',

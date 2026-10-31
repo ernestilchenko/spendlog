@@ -14,8 +14,13 @@
     <span class="stat-value positive">{{ income|money }}</span>
   </div>
   <div class="stat">
-    <span class="stat-label">{% translate 'Balance' %}</span>
+    <span class="stat-label">{% translate 'Saved' %}</span>
+    <span class="stat-value">{{ saved|money }}</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">{% translate 'Left' %}</span>
     <span class="stat-value {% if balance < 0 %}negative{% endif %}">{{ balance|money }}</span>
+    <span class="stat-note">{% translate 'income − spent − saved' %}</span>
   </div>
   {% if budget_total %}
   <div class="stat">
@@ -55,6 +60,18 @@
   <p class="empty">{% translate 'No expenses this month yet.' %}</p>
   {% endif %}
 </section>
+
+{% if goals %}
+<section class="card">
+  <div class="card-head">
+    <h2>{% translate 'Savings goals' %}</h2>
+    <a href="{% url 'savings:goal_list' %}">{% translate 'All goals' %}</a>
+  </div>
+  <ul class="bars">
+    {% for item in goals %}{% include 'partials/_goal_progress.html' %}{% endfor %}
+  </ul>
+</section>
+{% endif %}
 
 <section class="card">
   <div class="card-head">

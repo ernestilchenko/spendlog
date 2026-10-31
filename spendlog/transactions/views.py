@@ -6,6 +6,8 @@ from django.views.decorators.http import require_GET, require_http_methods
 
 from spendlog.core.choices import TransactionKind
 from spendlog.core.months import parse_month, shift_month
+from spendlog.currencies.messages import CurrencyMessages
+from spendlog.currencies.services import ExchangeRateUnavailable
 
 from .forms import TransactionForm
 from .messages import TransactionMessages
@@ -44,9 +46,13 @@ def transaction_create(request):
     }
     form = TransactionForm(request.POST or None, user=request.user, initial=initial)
     if request.method == 'POST' and form.is_valid():
-        save_transaction(form, request.user)
-        messages.success(request, TransactionMessages.CREATED)
-        return redirect('transactions:transaction_list')
+        try:
+            save_transaction(form, request.user)
+        except ExchangeRateUnavailable:
+            form.add_error('currency', CurrencyMessages.RATE_UNAVAILABLE)
+        else:
+            messages.success(request, TransactionMessages.CREATED)
+            return redirect('transactions:transaction_list')
     return render(request, 'transactions/transaction_form.html', {'form': form})
 
 
@@ -56,9 +62,13 @@ def transaction_update(request, pk):
     transaction = get_object_or_404(request.user.transactions, pk=pk)
     form = TransactionForm(request.POST or None, instance=transaction, user=request.user)
     if request.method == 'POST' and form.is_valid():
-        save_transaction(form, request.user)
-        messages.success(request, TransactionMessages.UPDATED)
-        return redirect('transactions:transaction_list')
+        try:
+            save_transaction(form, request.user)
+        except ExchangeRateUnavailable:
+            form.add_error('currency', CurrencyMessages.RATE_UNAVAILABLE)
+        else:
+            messages.success(request, TransactionMessages.UPDATED)
+            return redirect('transactions:transaction_list')
     return render(request, 'transactions/transaction_form.html', {'form': form, 'transaction': transaction})
 
 

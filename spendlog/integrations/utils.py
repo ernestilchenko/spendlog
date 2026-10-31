@@ -5,9 +5,27 @@ from decimal import Decimal, InvalidOperation
 
 from django.utils import timezone
 
+from spendlog.core.choices import Currency
+
 from .models import ApiToken
 
 AMOUNT_NOISE = re.compile(r'[^\d,.\-]')
+
+CURRENCY_MARKERS = (
+    ('PLN', Currency.PLN),
+    ('zł', Currency.PLN),
+    ('EUR', Currency.EUR),
+    ('€', Currency.EUR),
+    ('UAH', Currency.UAH),
+    ('₴', Currency.UAH),
+    ('GBP', Currency.GBP),
+    ('£', Currency.GBP),
+    ('CHF', Currency.CHF),
+    ('CZK', Currency.CZK),
+    ('Kč', Currency.CZK),
+    ('USD', Currency.USD),
+    ('$', Currency.USD),
+)
 
 
 def hash_token(raw_token):
@@ -34,6 +52,17 @@ def read_payload(request):
             return {}
         return payload if isinstance(payload, dict) else {}
     return request.POST
+
+
+def detect_currency(value, explicit=''):
+    explicit = str(explicit or '').strip().upper()
+    if explicit in Currency.values:
+        return explicit
+    text = str(value)
+    for marker, currency in CURRENCY_MARKERS:
+        if marker in text:
+            return currency
+    return Currency.PLN
 
 
 def parse_amount(value):

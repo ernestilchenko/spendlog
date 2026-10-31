@@ -41,7 +41,9 @@ LOCAL_APPS = [
     'spendlog.core.apps.CoreConfig',
     'spendlog.users.apps.UsersConfig',
     'spendlog.categories.apps.CategoriesConfig',
+    'spendlog.currencies.apps.CurrenciesConfig',
     'spendlog.transactions.apps.TransactionsConfig',
+    'spendlog.savings.apps.SavingsConfig',
     'spendlog.integrations.apps.IntegrationsConfig',
     'spendlog.dashboard.apps.DashboardConfig',
 ]
@@ -122,4 +124,6 @@ ANTHROPIC_API_KEY = get_env_variable('ANTHROPIC_API_KEY', '')
 CATEGORIZER_MODEL = get_env_variable('CATEGORIZER_MODEL', 'claude-opus-5')
 CATEGORIZER_TIMEOUT_SECONDS = 20.0
 
-CURRENCY_SYMBOL = 'zł'
+NBP_API_URL = 'https://api.nbp.pl/api/exchangerates'
+NBP_TIMEOUT_SECONDS = 6
+NBP_LOOKBACK_DAYS = 10

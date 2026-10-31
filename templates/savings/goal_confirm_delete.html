@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Delete goal' %}{% endblock %}
+{% block content %}
+<form method="post" class="card form">
+  {% csrf_token %}
+  <h1>{% blocktranslate with name=goal.name %}Delete “{{ name }}”?{% endblocktranslate %}</h1>
+  <p class="muted">{% translate 'The whole history of this goal will be deleted too.' %}</p>
+  <div class="form-actions">
+    <button type="submit" class="button button-danger">{% translate 'Delete' %}</button>
+    <a href="{% url 'savings:goal_detail' goal.pk %}" class="button">{% translate 'Cancel' %}</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n money %}
 {% block title %}{% if transaction %}{% translate 'Edit transaction' %}{% else %}{% translate 'New transaction' %}{% endif %}{% endblock %}
 {% block content %}
 <div class="page-head">
   <h1>{% if transaction %}{% translate 'Edit transaction' %}{% else %}{% translate 'New transaction' %}{% endif %}</h1>
 </div>
+{% if transaction.is_foreign %}<p class="muted">{% blocktranslate with amount=transaction.amount_pln|money rate=transaction.exchange_rate|floatformat:4 currency=transaction.currency %}Counted as {{ amount }} at the NBP rate {{ rate }} PLN per {{ currency }}{% endblocktranslate %}</p>{% endif %}
 {% if transaction.card %}<p class="muted">{% blocktranslate with card=transaction.card source=transaction.get_source_display %}Paid with {{ card }} via {{ source }}{% endblocktranslate %}</p>{% endif %}
 <form method="post" class="card form">
   {% csrf_token %}

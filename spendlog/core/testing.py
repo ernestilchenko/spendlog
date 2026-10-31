@@ -22,6 +22,7 @@ def create_transaction(user, amount='10.00', kind=TransactionKind.EXPENSE, categ
         user=user,
         kind=kind,
         amount=Decimal(amount),
+        amount_pln=Decimal(amount),
         merchant=merchant,
         category=category,
         occurred_at=occurred_at or timezone.now(),

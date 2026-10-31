@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 
 from spendlog.categories.models import MerchantRule
 from spendlog.core.choices import TransactionSource
@@ -90,3 +91,40 @@ class ApplePayIngestTests(TestCase):
         with patch(SUGGEST, return_value=None):
             self.send({'amount': '1', 'merchant': 'Kiosk'})
         self.assertIsNotNone(ApiToken.objects.get(user=self.user).last_used_at)
+
+
+class ApplePayForeignCurrencyTests(TestCase):
+    def setUp(self):
+        self.user = create_user()
+        self.token = issue_token(self.user)
+        self.url = reverse('integrations:apple_pay_ingest')
+
+    def send(self, payload):
+        return self.client.post(
+            self.url,
+            data=json.dumps(payload),
+            content_type='application/json',
+            headers={'Authorization': f'Token {self.token}'},
+        )
+
+    @patch(SUGGEST, return_value=None)
+    def test_euro_sign_is_converted(self, suggest):
+        with patch('spendlog.currencies.nbp.fetch_nbp_rates', return_value={timezone.localdate(): Decimal('4.25')}):
+            response = self.send({'amount': '€12,50', 'merchant': 'Bäckerei'})
+        self.assertEqual(response.status_code, 201)
+        transaction = self.user.transactions.get()
+        self.assertEqual((transaction.currency, transaction.amount_pln), ('EUR', Decimal('53.13')))
+        self.assertIn('≈ 53,13 zł', response.json()['message'])
+
+    @patch(SUGGEST, return_value=None)
+    def test_hryvnia_and_explicit_currency(self, suggest):
+        with patch('spendlog.currencies.nbp.fetch_nbp_rates', return_value={timezone.localdate(): Decimal('0.0950')}):
+            self.send({'amount': '200,00 ₴', 'merchant': 'Silpo'})
+            self.send({'amount': '100', 'currency': 'uah', 'merchant': 'ATB'})
+        self.assertEqual(list(self.user.transactions.values_list('currency', flat=True)), ['UAH', 'UAH'])
+
+    def test_rate_unavailable_returns_503(self):
+        with patch('spendlog.currencies.nbp.fetch_nbp_rates', return_value={}):
+            response = self.send({'amount': '$5', 'merchant': 'Shop'})
+        self.assertEqual(response.status_code, 503)
+        self.assertFalse(self.user.transactions.exists())

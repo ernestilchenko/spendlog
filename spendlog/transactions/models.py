@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from spendlog.categories.models import Category
-from spendlog.core.choices import TransactionKind, TransactionSource
+from spendlog.core.choices import Currency, TransactionKind, TransactionSource
 from spendlog.core.models import TimeStampedModel
 
 from .managers import TransactionQuerySet
@@ -17,6 +17,9 @@ class Transaction(TimeStampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='transactions')
     kind = models.CharField(_('type'), max_length=10, choices=TransactionKind, default=TransactionKind.EXPENSE)
     amount = models.DecimalField(_('amount'), max_digits=12, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    currency = models.CharField(_('currency'), max_length=3, choices=Currency, default=Currency.PLN)
+    amount_pln = models.DecimalField(_('amount in PLN'), max_digits=12, decimal_places=2)
+    exchange_rate = models.DecimalField(_('exchange rate'), max_digits=12, decimal_places=6, default=Decimal('1'))
     merchant = models.CharField(_('merchant'), max_length=160, blank=True)
     category = models.ForeignKey(
         Category,
@@ -45,3 +48,7 @@ class Transaction(TimeStampedModel):
     @property
     def is_expense(self):
         return self.kind == TransactionKind.EXPENSE
+
+    @property
+    def is_foreign(self):
+        return self.currency != Currency.PLN

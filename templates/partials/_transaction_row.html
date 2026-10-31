@@ -8,6 +8,7 @@
     </span>
   </a>
   <span class="tx-amount {% if transaction.is_expense %}negative{% else %}positive{% endif %}">
-    {% if transaction.is_expense %}−{% else %}+{% endif %}{{ transaction.amount|money }}
+    {% if transaction.is_expense %}−{% else %}+{% endif %}{{ transaction.amount|money:transaction.currency }}
+    {% if transaction.is_foreign %}<small class="tx-converted">≈ {{ transaction.amount_pln|money }}</small>{% endif %}
   </span>
 </li>

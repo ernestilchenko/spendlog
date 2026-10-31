@@ -19,4 +19,4 @@ class TransactionQuerySet(models.QuerySet):
         return self.filter(kind=TransactionKind.INCOME)
 
     def total(self):
-        return self.aggregate(total=Sum('amount'))['total'] or Decimal('0')
+        return self.aggregate(total=Sum('amount_pln'))['total'] or Decimal('0')

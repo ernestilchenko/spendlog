@@ -12,7 +12,7 @@ class TransactionForm(forms.ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ('kind', 'amount', 'merchant', 'category', 'occurred_at', 'note')
+        fields = ('kind', 'amount', 'currency', 'merchant', 'category', 'occurred_at', 'note')
         widgets = {
             'occurred_at': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format=DATETIME_INPUT_FORMAT),
             'amount': forms.NumberInput(attrs={'step': '0.01', 'min': '0.01', 'inputmode': 'decimal'}),

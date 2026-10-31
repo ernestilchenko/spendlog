@@ -1,0 +1,15 @@
+{% load i18n money %}
+<li class="bar-row">
+  <a class="bar-label" href="{% url 'savings:goal_detail' item.goal.pk %}">
+    <span><span class="dot" style="background: {{ item.goal.color }}"></span>{{ item.goal.name }}</span>
+    <span class="bar-amount">
+      {{ item.saved|money }}{% if item.target %} <span class="muted">/ {{ item.target|money }}</span>{% endif %}
+    </span>
+  </a>
+  {% if item.target %}
+  <div class="bar-track"><div class="bar-fill" style="width: {{ item.percent }}%; background: {{ item.goal.color }}"></div></div>
+  <small class="muted">
+    {% if item.is_reached %}{% translate 'Goal reached' %}{% else %}{% blocktranslate with percent=item.percent remaining=item.remaining|money %}{{ percent }}% · {{ remaining }} to go{% endblocktranslate %}{% if item.monthly_needed %} · {% blocktranslate with amount=item.monthly_needed|money date=item.goal.target_date|date:'M Y' %}{{ amount }} a month to make it by {{ date }}{% endblocktranslate %}{% endif %}{% endif %}
+  </small>
+  {% endif %}
+</li>

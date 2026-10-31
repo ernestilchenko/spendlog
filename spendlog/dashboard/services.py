@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.utils.translation import gettext
 
 from spendlog.core.choices import TransactionKind
+from spendlog.savings.services import active_goal_progress, month_savings
 
 RECENT_LIMIT = 8
 
@@ -34,7 +35,7 @@ class CategorySpending:
 
 def build_category_rows(user, expenses):
     spent_by_category = {
-        row['category']: row['total'] for row in expenses.values('category').annotate(total=Sum('amount'))
+        row['category']: row['total'] for row in expenses.values('category').annotate(total=Sum('amount_pln'))
     }
     rows = []
     for category in user.categories.filter(kind=TransactionKind.EXPENSE):
@@ -59,10 +60,13 @@ def build_month_summary(user, month_start):
     budgets = user.categories.filter(kind=TransactionKind.EXPENSE, monthly_budget__isnull=False)
     budget_total = budgets.aggregate(total=Sum('monthly_budget'))['total']
     budget_spent = expenses.filter(category__in=budgets).total()
+    saved = month_savings(user, month_start)
     return {
         'income': income,
         'expense': expense,
-        'balance': income - expense,
+        'saved': saved,
+        'balance': income - expense - saved,
+        'goals': active_goal_progress(user),
         'category_rows': build_category_rows(user, expenses),
         'budget_total': budget_total,
         'budget_spent': budget_spent,
