@@ -1,0 +1,6 @@
+{% load i18n %}
+<div class="month-nav">
+  <a class="month-arrow" href="?month={{ previous_month|date:'Y-m' }}" aria-label="{% translate 'Previous month' %}">‹</a>
+  <h1>{{ month|date:'F Y'|capfirst }}</h1>
+  <a class="month-arrow" href="?month={{ next_month|date:'Y-m' }}" aria-label="{% translate 'Next month' %}">›</a>
+</div>

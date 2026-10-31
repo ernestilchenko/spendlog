@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Log in' %}{% endblock %}
+{% block content %}
+<section class="auth">
+  <h1 class="auth-title">{% translate 'Where did the money go?' %}</h1>
+  <p class="auth-subtitle">{% translate 'Spendlog keeps track of every tap.' %}</p>
+  <form method="post" class="auth-card">
+    {% csrf_token %}
+    {% include 'partials/_form.html' %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="button button-primary button-block">{% translate 'Continue' %}</button>
+  </form>
+  <p class="auth-footer">{% translate 'Spendlog · personal budget' %}</p>
+</section>
+{% endblock %}

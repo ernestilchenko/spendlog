@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Transactions' %}{% endblock %}
+{% block content %}
+{% include 'partials/_month_nav.html' %}
+
+<form method="get" class="filters">
+  <input type="hidden" name="month" value="{{ month|date:'Y-m' }}">
+  <select name="kind" onchange="this.form.submit()">
+    <option value="">{% translate 'All types' %}</option>
+    {% for value, label in kinds %}
+    <option value="{{ value }}" {% if value == selected_kind %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <select name="category" onchange="this.form.submit()">
+    <option value="">{% translate 'All categories' %}</option>
+    <option value="{{ uncategorized }}" {% if selected_category == uncategorized %}selected{% endif %}>{% translate 'Uncategorized' %}</option>
+    {% for category in categories %}
+    <option value="{{ category.pk }}" {% if selected_category == category.pk|stringformat:'d' %}selected{% endif %}>{{ category.display_name }}</option>
+    {% endfor %}
+  </select>
+  <noscript><button type="submit" class="button">{% translate 'Filter' %}</button></noscript>
+</form>
+
+<section class="stats stats-compact">
+  <div class="stat"><span class="stat-label">{% translate 'Spent' %}</span><span class="stat-value negative">{{ expense_total|money }}</span></div>
+  <div class="stat"><span class="stat-label">{% translate 'Income' %}</span><span class="stat-value positive">{{ income_total|money }}</span></div>
+</section>
+
+<section class="card">
+  {% if transactions %}
+  <ul class="tx-list">
+    {% for transaction in transactions %}
+    {% include 'partials/_transaction_row.html' %}
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">{% translate 'No transactions match.' %}</p>
+  {% endif %}
+</section>
+{% endblock %}

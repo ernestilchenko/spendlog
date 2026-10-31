@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% if transaction %}{% translate 'Edit transaction' %}{% else %}{% translate 'New transaction' %}{% endif %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% if transaction %}{% translate 'Edit transaction' %}{% else %}{% translate 'New transaction' %}{% endif %}</h1>
+</div>
+{% if transaction.card %}<p class="muted">{% blocktranslate with card=transaction.card source=transaction.get_source_display %}Paid with {{ card }} via {{ source }}{% endblocktranslate %}</p>{% endif %}
+<form method="post" class="card form">
+  {% csrf_token %}
+  {% include 'partials/_form.html' %}
+  <div class="form-actions">
+    <button type="submit" class="button button-primary">{% translate 'Save' %}</button>
+    <a href="{% url 'transactions:transaction_list' %}" class="button">{% translate 'Cancel' %}</a>
+    {% if transaction %}<a href="{% url 'transactions:transaction_delete' transaction.pk %}" class="button button-danger push-right">{% translate 'Delete' %}</a>{% endif %}
+  </div>
+</form>
+{% endblock %}

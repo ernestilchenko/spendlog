@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Rules' %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% translate 'Merchant rules' %}</h1>
+  <a href="{% url 'categories:rule_create' %}" class="button button-primary">{% translate 'New rule' %}</a>
+</div>
+<p class="muted">{% translate 'If the merchant name contains the text, the payment goes to that category. Rules are also learned automatically when Claude picks a category or when you tick “Always use this category”.' %}</p>
+<section class="card">
+  {% if rules %}
+  <ul class="plain-list">
+    {% for rule in rules %}
+    <li class="plain-row">
+      <span><code>{{ rule.pattern }}</code> → <span class="dot" style="background: {{ rule.category.color }}"></span>{{ rule.category.display_name }}</span>
+      <a href="{% url 'categories:rule_delete' rule.pk %}" class="muted">{% translate 'Delete' %}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">{% translate 'No rules yet.' %}</p>
+  {% endif %}
+</section>
+{% endblock %}

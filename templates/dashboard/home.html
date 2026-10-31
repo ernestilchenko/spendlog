@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Overview' %}{% endblock %}
+{% block content %}
+{% include 'partials/_month_nav.html' %}
+
+<section class="stats">
+  <div class="stat">
+    <span class="stat-label">{% translate 'Spent' %}</span>
+    <span class="stat-value negative">{{ expense|money }}</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">{% translate 'Income' %}</span>
+    <span class="stat-value positive">{{ income|money }}</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">{% translate 'Balance' %}</span>
+    <span class="stat-value {% if balance < 0 %}negative{% endif %}">{{ balance|money }}</span>
+  </div>
+  {% if budget_total %}
+  <div class="stat">
+    <span class="stat-label">{% translate 'Budget left' %}</span>
+    <span class="stat-value {% if budget_left < 0 %}negative{% endif %}">{{ budget_left|money }}</span>
+    <span class="stat-note">{% blocktranslate with total=budget_total|money %}of {{ total }}{% endblocktranslate %}</span>
+  </div>
+  {% endif %}
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>{% translate 'By category' %}</h2>
+  </div>
+  {% if category_rows %}
+  <ul class="bars">
+    {% for row in category_rows %}
+    <li class="bar-row">
+      <div class="bar-label">
+        <span><span class="dot" style="background: {{ row.color }}"></span>{{ row.name }}</span>
+        <span class="bar-amount">
+          {{ row.spent|money }}{% if row.budget %} <span class="muted">/ {{ row.budget|money }}</span>{% endif %}
+        </span>
+      </div>
+      <div class="bar-track">
+        {% if row.budget %}
+        <div class="bar-fill{% if row.over_budget %} over{% endif %}" style="width: {% if row.budget_percent > 100 %}100{% else %}{{ row.budget_percent }}{% endif %}%; background: {{ row.color }}"></div>
+        {% else %}
+        <div class="bar-fill" style="width: {{ row.share }}%; background: {{ row.color }}"></div>
+        {% endif %}
+      </div>
+      {% if row.over_budget %}<small class="error">{% blocktranslate with amount=row.left|money|cut:'−' %}Over budget by {{ amount }}{% endblocktranslate %}</small>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">{% translate 'No expenses this month yet.' %}</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>{% translate 'Latest' %}</h2>
+    {% if transaction_count %}<a href="{% url 'transactions:transaction_list' %}?month={{ month|date:'Y-m' }}">{% blocktranslate with count=transaction_count %}All {{ count }}{% endblocktranslate %}</a>{% endif %}
+  </div>
+  {% if recent_transactions %}
+  <ul class="tx-list">
+    {% for transaction in recent_transactions %}
+    {% include 'partials/_transaction_row.html' %}
+    {% endfor %}
+  </ul>
+  {% else %}
+  {% url 'transactions:transaction_create' as create_url %}
+  <p class="empty">{% blocktranslate %}Nothing here yet. Pay with Apple Pay or <a href="{{ create_url }}">add a transaction</a>.{% endblocktranslate %}</p>
+  {% endif %}
+</section>
+{% endblock %}

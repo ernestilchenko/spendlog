@@ -1,0 +1,13 @@
+{% load i18n money %}
+<li class="tx">
+  <span class="dot" style="background: {{ transaction.category.color|default:'#cbd5e1' }}"></span>
+  <a class="tx-main" href="{% url 'transactions:transaction_update' transaction.pk %}">
+    <span class="tx-title">{{ transaction.merchant|default:transaction.get_kind_display }}</span>
+    <span class="tx-meta">
+      {% if transaction.category %}{{ transaction.category.display_name }}{% else %}{% translate 'Uncategorized' %}{% endif %} · {{ transaction.occurred_at|date:'j M, H:i' }}{% if transaction.source == 'apple_pay' %} · <span class="badge">Apple Pay</span>{% endif %}
+    </span>
+  </a>
+  <span class="tx-amount {% if transaction.is_expense %}negative{% else %}positive{% endif %}">
+    {% if transaction.is_expense %}−{% else %}+{% endif %}{{ transaction.amount|money }}
+  </span>
+</li>

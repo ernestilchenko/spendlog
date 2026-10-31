@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Delete transaction' %}{% endblock %}
+{% block content %}
+<form method="post" class="card form">
+  {% csrf_token %}
+  <h1>{% translate 'Delete this transaction?' %}</h1>
+  <p>{{ transaction.merchant|default:transaction.get_kind_display }} · {{ transaction.amount|money }} · {{ transaction.occurred_at|date:'j M Y, H:i' }}</p>
+  <div class="form-actions">
+    <button type="submit" class="button button-danger">{% translate 'Delete' %}</button>
+    <a href="{% url 'transactions:transaction_update' transaction.pk %}" class="button">{% translate 'Cancel' %}</a>
+  </div>
+</form>
+{% endblock %}

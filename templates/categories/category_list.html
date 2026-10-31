@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Categories' %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% translate 'Categories' %}</h1>
+  <a href="{% url 'categories:category_create' %}" class="button button-primary">{% translate 'New category' %}</a>
+</div>
+{% regroup categories by get_kind_display as groups %}
+{% for group in groups %}
+<section class="card">
+  <div class="card-head"><h2>{{ group.grouper }}</h2></div>
+  <ul class="plain-list">
+    {% for category in group.list %}
+    <li>
+      <a href="{% url 'categories:category_update' category.pk %}" class="plain-row">
+        <span><span class="dot" style="background: {{ category.color }}"></span>{{ category.display_name }}</span>
+        <span class="muted">
+          {% if category.monthly_budget %}{% blocktranslate with budget=category.monthly_budget|money %}{{ budget }} / month{% endblocktranslate %} · {% endif %}{{ category.transaction_count }}
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endblock %}

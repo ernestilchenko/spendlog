@@ -1,0 +1,575 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 11:38+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+#: config/settings/base.py:104
+msgid "English"
+msgstr "Angielski"
+
+#: config/settings/base.py:105
+msgid "Polish"
+msgstr "Polski"
+
+#: config/settings/base.py:106
+msgid "Ukrainian"
+msgstr "Ukraiński"
+
+#: spendlog/categories/messages.py:5
+msgid "Category created"
+msgstr "Kategoria utworzona"
+
+#: spendlog/categories/messages.py:6
+msgid "Category saved"
+msgstr "Kategoria zapisana"
+
+#: spendlog/categories/messages.py:7
+msgid "Category deleted"
+msgstr "Kategoria usunięta"
+
+#: spendlog/categories/messages.py:8
+msgid "This category already exists"
+msgstr "Taka kategoria już istnieje"
+
+#: spendlog/categories/messages.py:12
+msgid "Rule saved"
+msgstr "Reguła zapisana"
+
+#: spendlog/categories/messages.py:13
+msgid "Rule deleted"
+msgstr "Reguła usunięta"
+
+#: spendlog/categories/messages.py:14
+msgid "A rule for this merchant already exists"
+msgstr "Reguła dla tego sprzedawcy już istnieje"
+
+#: spendlog/categories/models.py:12
+msgid "name"
+msgstr "nazwa"
+
+#: spendlog/categories/models.py:13 spendlog/transactions/models.py:18
+msgid "type"
+msgstr "typ"
+
+#: spendlog/categories/models.py:14
+msgid "color"
+msgstr "kolor"
+
+#: spendlog/categories/models.py:15
+msgid "monthly budget"
+msgstr "budżet miesięczny"
+
+#: spendlog/categories/models.py:19 spendlog/categories/models.py:36
+#: spendlog/transactions/models.py:27
+msgid "category"
+msgstr "kategoria"
+
+#: spendlog/categories/models.py:20
+msgid "categories"
+msgstr "kategorie"
+
+#: spendlog/categories/models.py:35
+msgid "merchant contains"
+msgstr "sprzedawca zawiera"
+
+#: spendlog/categories/models.py:40
+msgid "rule"
+msgstr "reguła"
+
+#: spendlog/categories/models.py:41
+msgid "rules"
+msgstr "reguły"
+
+#: spendlog/categories/services.py:9
+msgid "Other"
+msgstr "Inne"
+
+#: spendlog/categories/services.py:12
+msgid "Groceries"
+msgstr "Zakupy spożywcze"
+
+#: spendlog/categories/services.py:13
+msgid "Cafes & restaurants"
+msgstr "Kawiarnie i restauracje"
+
+#: spendlog/categories/services.py:14
+msgid "Transport"
+msgstr "Transport"
+
+#: spendlog/categories/services.py:15
+msgid "Housing & bills"
+msgstr "Mieszkanie i rachunki"
+
+#: spendlog/categories/services.py:16
+msgid "Phone & subscriptions"
+msgstr "Telefon i subskrypcje"
+
+#: spendlog/categories/services.py:17
+msgid "Health & pharmacy"
+msgstr "Zdrowie i apteka"
+
+#: spendlog/categories/services.py:18
+msgid "Clothes & shoes"
+msgstr "Ubrania i buty"
+
+#: spendlog/categories/services.py:19
+msgid "Home"
+msgstr "Dom"
+
+#: spendlog/categories/services.py:20
+msgid "Entertainment"
+msgstr "Rozrywka"
+
+#: spendlog/categories/services.py:21
+msgid "Online shopping"
+msgstr "Zakupy online"
+
+#: spendlog/categories/services.py:23
+msgid "Salary"
+msgstr "Wynagrodzenie"
+
+#: spendlog/categories/services.py:24
+msgid "Side income"
+msgstr "Dodatkowy dochód"
+
+#: spendlog/categories/services.py:25
+msgid "Bonus"
+msgstr "Premia"
+
+#: spendlog/categories/services.py:26
+msgid "Other income"
+msgstr "Inne przychody"
+
+#: spendlog/core/choices.py:6
+msgid "Expense"
+msgstr "Wydatek"
+
+#: spendlog/core/choices.py:7 templates/dashboard/home.html:13
+#: templates/transactions/transaction_list.html:27
+msgid "Income"
+msgstr "Przychód"
+
+#: spendlog/core/choices.py:11
+msgid "Manual"
+msgstr "Ręcznie"
+
+#: spendlog/dashboard/services.py:46 spendlog/integrations/messages.py:7
+#: templates/partials/_transaction_row.html:7
+#: templates/transactions/transaction_list.html:17
+msgid "Uncategorized"
+msgstr "Bez kategorii"
+
+#: spendlog/integrations/messages.py:5
+msgid "Invalid or missing API token"
+msgstr "Nieprawidłowy lub brakujący token API"
+
+#: spendlog/integrations/messages.py:6
+msgid "Could not read the payment amount"
+msgstr "Nie udało się odczytać kwoty płatności"
+
+#: spendlog/integrations/messages.py:9
+msgid "New token created. Copy it now: it will not be shown again"
+msgstr "Utworzono nowy token. Skopiuj go teraz: nie zostanie pokazany ponownie"
+
+#: spendlog/transactions/forms.py:11
+msgid "Always use this category for this merchant"
+msgstr "Zawsze używaj tej kategorii dla tego sprzedawcy"
+
+#: spendlog/transactions/forms.py:24
+msgid "Auto"
+msgstr "Automatycznie"
+
+#: spendlog/transactions/messages.py:5
+msgid "Transaction added"
+msgstr "Transakcja dodana"
+
+#: spendlog/transactions/messages.py:6
+msgid "Transaction saved"
+msgstr "Transakcja zapisana"
+
+#: spendlog/transactions/messages.py:7
+msgid "Transaction deleted"
+msgstr "Transakcja usunięta"
+
+#: spendlog/transactions/messages.py:8
+msgid "This category does not match the transaction type"
+msgstr "Ta kategoria nie pasuje do typu transakcji"
+
+#: spendlog/transactions/models.py:19
+msgid "amount"
+msgstr "kwota"
+
+#: spendlog/transactions/models.py:20
+msgid "merchant"
+msgstr "sprzedawca"
+
+#: spendlog/transactions/models.py:29
+msgid "date"
+msgstr "data"
+
+#: spendlog/transactions/models.py:30
+msgid "source"
+msgstr "źródło"
+
+#: spendlog/transactions/models.py:31
+msgid "card"
+msgstr "karta"
+
+#: spendlog/transactions/models.py:32
+msgid "note"
+msgstr "notatka"
+
+#: spendlog/transactions/models.py:38
+msgid "transaction"
+msgstr "transakcja"
+
+#: spendlog/transactions/models.py:39
+msgid "transactions"
+msgstr "transakcje"
+
+#: spendlog/users/forms.py:8 spendlog/users/forms.py:9
+msgid "Email"
+msgstr "E-mail"
+
+#: spendlog/users/forms.py:12 spendlog/users/forms.py:14
+msgid "Password"
+msgstr "Hasło"
+
+#: templates/base.html:24 templates/dashboard/home.html:3
+msgid "Overview"
+msgstr "Przegląd"
+
+#: templates/base.html:25 templates/transactions/transaction_list.html:3
+msgid "Transactions"
+msgstr "Transakcje"
+
+#: templates/base.html:26 templates/categories/category_list.html:3
+#: templates/categories/category_list.html:6
+msgid "Categories"
+msgstr "Kategorie"
+
+#: templates/base.html:27 templates/categories/rule_list.html:3
+msgid "Rules"
+msgstr "Reguły"
+
+#: templates/base.html:37
+msgid "Log out"
+msgstr "Wyloguj"
+
+#: templates/base.html:47
+msgid "Add transaction"
+msgstr "Dodaj transakcję"
+
+#: templates/categories/category_confirm_delete.html:3
+msgid "Delete category"
+msgstr "Usuń kategorię"
+
+#: templates/categories/category_confirm_delete.html:7
+#, python-format
+msgid "Delete “%(name)s”?"
+msgstr "Usunąć „%(name)s”?"
+
+#: templates/categories/category_confirm_delete.html:8
+msgid ""
+"Its transactions stay and become uncategorized. Merchant rules pointing to "
+"it are removed."
+msgstr "Jej transakcje zostaną, ale stracą kategorię. Reguły sprzedawców wskazujące na nią zostaną usunięte."
+
+#: templates/categories/category_confirm_delete.html:10
+#: templates/categories/category_form.html:14
+#: templates/categories/rule_confirm_delete.html:10
+#: templates/categories/rule_list.html:16
+#: templates/transactions/transaction_confirm_delete.html:10
+#: templates/transactions/transaction_form.html:15
+msgid "Delete"
+msgstr "Usuń"
+
+#: templates/categories/category_confirm_delete.html:11
+#: templates/categories/category_form.html:13
+#: templates/categories/rule_confirm_delete.html:11
+#: templates/categories/rule_form.html:11
+#: templates/transactions/transaction_confirm_delete.html:11
+#: templates/transactions/transaction_form.html:14
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: templates/categories/category_form.html:3
+msgid "Edit category"
+msgstr "Edytuj kategorię"
+
+#: templates/categories/category_form.html:3
+#: templates/categories/category_form.html:6
+#: templates/categories/category_list.html:7
+msgid "New category"
+msgstr "Nowa kategoria"
+
+#: templates/categories/category_form.html:12
+#: templates/categories/rule_form.html:10
+#: templates/transactions/transaction_form.html:13
+msgid "Save"
+msgstr "Zapisz"
+
+#: templates/categories/category_list.html:19
+#, python-format
+msgid "%(budget)s / month"
+msgstr "%(budget)s / miesiąc"
+
+#: templates/categories/rule_confirm_delete.html:3
+msgid "Delete rule"
+msgstr "Usuń regułę"
+
+#: templates/categories/rule_confirm_delete.html:7
+msgid "Delete rule?"
+msgstr "Usunąć regułę?"
+
+#: templates/categories/rule_form.html:3 templates/categories/rule_form.html:5
+#: templates/categories/rule_list.html:7
+msgid "New rule"
+msgstr "Nowa reguła"
+
+#: templates/categories/rule_list.html:6
+msgid "Merchant rules"
+msgstr "Reguły sprzedawców"
+
+#: templates/categories/rule_list.html:9
+msgid ""
+"If the merchant name contains the text, the payment goes to that category. "
+"Rules are also learned automatically when Claude picks a category or when "
+"you tick “Always use this category”."
+msgstr "Jeśli nazwa sprzedawcy zawiera ten tekst, płatność trafia do tej kategorii. Reguły tworzą się też automatycznie, gdy Claude wybierze kategorię lub gdy zaznaczysz „Zawsze używaj tej kategorii”."
+
+#: templates/categories/rule_list.html:21
+msgid "No rules yet."
+msgstr "Nie ma jeszcze reguł."
+
+#: templates/dashboard/home.html:9
+#: templates/transactions/transaction_list.html:26
+msgid "Spent"
+msgstr "Wydano"
+
+#: templates/dashboard/home.html:17
+msgid "Balance"
+msgstr "Saldo"
+
+#: templates/dashboard/home.html:22
+msgid "Budget left"
+msgstr "Zostało z budżetu"
+
+#: templates/dashboard/home.html:24
+#, python-format
+msgid "of %(total)s"
+msgstr "z %(total)s"
+
+#: templates/dashboard/home.html:31
+msgid "By category"
+msgstr "Według kategorii"
+
+#: templates/dashboard/home.html:50
+#, python-format
+msgid "Over budget by %(amount)s"
+msgstr "Przekroczono budżet o %(amount)s"
+
+#: templates/dashboard/home.html:55
+msgid "No expenses this month yet."
+msgstr "W tym miesiącu nie ma jeszcze wydatków."
+
+#: templates/dashboard/home.html:61
+msgid "Latest"
+msgstr "Ostatnie"
+
+#: templates/dashboard/home.html:62
+#, python-format
+msgid "All %(count)s"
+msgstr "Wszystkie %(count)s"
+
+#: templates/dashboard/home.html:72
+#, python-format
+msgid ""
+"Nothing here yet. Pay with Apple Pay or <a href=\"%(create_url)s\">add a "
+"transaction</a>."
+msgstr "Na razie pusto. Zapłać Apple Pay albo <a href=\"%(create_url)s\">dodaj transakcję</a>."
+
+#: templates/integrations/apple_pay_setup.html:5
+msgid "Apple Pay sync"
+msgstr "Synchronizacja Apple Pay"
+
+#: templates/integrations/apple_pay_setup.html:6
+msgid ""
+"An iPhone Shortcuts automation sends every tap-to-pay payment here. Spendlog "
+"saves it and picks a category automatically."
+msgstr "Automatyzacja w Skrótach na iPhonie wysyła tutaj każdą płatność zbliżeniową. Spendlog ją zapisuje i sam dobiera kategorię."
+
+#: templates/integrations/apple_pay_setup.html:9
+msgid "1. API token"
+msgstr "1. Token API"
+
+#: templates/integrations/apple_pay_setup.html:11
+msgid "Your new token. Copy it now, it will not be shown again:"
+msgstr "Twój nowy token. Skopiuj go teraz, nie zostanie pokazany ponownie:"
+
+#: templates/integrations/apple_pay_setup.html:14
+#, python-format
+msgid "Token active since %(date)s."
+msgstr "Token aktywny od %(date)s."
+
+#: templates/integrations/apple_pay_setup.html:15
+#, python-format
+msgid "Last payment received %(since)s ago."
+msgstr "Ostatnia płatność otrzymana %(since)s temu."
+
+#: templates/integrations/apple_pay_setup.html:15
+msgid "No payments received yet."
+msgstr "Nie otrzymano jeszcze żadnej płatności."
+
+#: templates/integrations/apple_pay_setup.html:18
+msgid "No token yet."
+msgstr "Nie ma jeszcze tokenu."
+
+#: templates/integrations/apple_pay_setup.html:22
+msgid "Replace token"
+msgstr "Wymień token"
+
+#: templates/integrations/apple_pay_setup.html:22
+msgid "Create token"
+msgstr "Utwórz token"
+
+#: templates/integrations/apple_pay_setup.html:24
+msgid "Replacing the token stops the old one. Update the shortcut afterwards."
+msgstr "Wymiana tokenu wyłącza stary. Potem zaktualizuj skrót."
+
+#: templates/integrations/apple_pay_setup.html:28
+msgid "2. Shortcut automation on iPhone"
+msgstr "2. Automatyzacja w Skrótach na iPhonie"
+
+#: templates/integrations/apple_pay_setup.html:30
+msgid ""
+"Open <b>Shortcuts</b> → <b>Automation</b> → <b>+</b> → <b>Transaction</b>."
+msgstr "Otwórz <b>Skróty</b> → <b>Automatyzacja</b> → <b>+</b> → <b>Transakcja</b>."
+
+#: templates/integrations/apple_pay_setup.html:31
+msgid ""
+"Select your cards in Wallet, choose <b>Run Immediately</b>, tap <b>Next</b> "
+"→ <b>New Blank Automation</b>."
+msgstr "Wybierz karty w Portfelu, ustaw <b>Uruchom natychmiast</b>, stuknij <b>Dalej</b> → <b>Nowa pusta automatyzacja</b>."
+
+#: templates/integrations/apple_pay_setup.html:32
+msgid "Add the action <b>Get Contents of URL</b>:"
+msgstr "Dodaj czynność <b>Pobierz zawartość URL</b>:"
+
+#: templates/integrations/apple_pay_setup.html:35
+msgid "Method"
+msgstr "Metoda"
+
+#: templates/integrations/apple_pay_setup.html:36
+msgid "Headers"
+msgstr "Nagłówki"
+
+#: templates/integrations/apple_pay_setup.html:36
+msgid "your token"
+msgstr "twój token"
+
+#: templates/integrations/apple_pay_setup.html:37
+msgid ""
+"Request Body: <b>JSON</b> with fields: <code>amount</code> → Shortcut Input "
+"<i>Amount</i>, <code>merchant</code> → <i>Merchant</i>, <code>card</code> → "
+"<i>Card or Pass</i>"
+msgstr "Treść żądania: <b>JSON</b> z polami: <code>amount</code> → wejście skrótu <i>Kwota</i>, <code>merchant</code> → <i>Sprzedawca</i>, <code>card</code> → <i>Karta lub karta Wallet</i>"
+
+#: templates/integrations/apple_pay_setup.html:40
+msgid ""
+"Optional: add <b>Get Dictionary Value</b> for key <code>message</code> and "
+"<b>Show Notification</b> with it, to see “Żabka · 18,50 zł → Groceries” "
+"after each payment."
+msgstr "Opcjonalnie: dodaj <b>Pobierz wartość ze słownika</b> dla klucza <code>message</code> i <b>Pokaż powiadomienie</b>, aby po każdej płatności widzieć „Żabka · 18,50 zł → Zakupy spożywcze”."
+
+#: templates/integrations/apple_pay_setup.html:42
+msgid ""
+"Only tap-to-pay with the iPhone triggers the automation. Physical card, BLIK "
+"and transfers need to be added manually with the + button."
+msgstr "Automatyzację uruchamia tylko płatność zbliżeniowa iPhonem. Kartę fizyczną, BLIK i przelewy dodaj ręcznie przyciskiem +."
+
+#: templates/integrations/apple_pay_setup.html:46
+msgid "Test from a terminal"
+msgstr "Test z terminala"
+
+#: templates/partials/_month_nav.html:3
+msgid "Previous month"
+msgstr "Poprzedni miesiąc"
+
+#: templates/partials/_month_nav.html:5
+msgid "Next month"
+msgstr "Następny miesiąc"
+
+#: templates/transactions/transaction_confirm_delete.html:3
+msgid "Delete transaction"
+msgstr "Usuń transakcję"
+
+#: templates/transactions/transaction_confirm_delete.html:7
+msgid "Delete this transaction?"
+msgstr "Usunąć tę transakcję?"
+
+#: templates/transactions/transaction_form.html:3
+#: templates/transactions/transaction_form.html:6
+msgid "Edit transaction"
+msgstr "Edytuj transakcję"
+
+#: templates/transactions/transaction_form.html:3
+#: templates/transactions/transaction_form.html:6
+msgid "New transaction"
+msgstr "Nowa transakcja"
+
+#: templates/transactions/transaction_form.html:8
+#, python-format
+msgid "Paid with %(card)s via %(source)s"
+msgstr "Zapłacono kartą %(card)s przez %(source)s"
+
+#: templates/transactions/transaction_list.html:10
+msgid "All types"
+msgstr "Wszystkie typy"
+
+#: templates/transactions/transaction_list.html:16
+msgid "All categories"
+msgstr "Wszystkie kategorie"
+
+#: templates/transactions/transaction_list.html:22
+msgid "Filter"
+msgstr "Filtruj"
+
+#: templates/transactions/transaction_list.html:38
+msgid "No transactions match."
+msgstr "Brak pasujących transakcji."
+
+#: templates/users/login.html:3
+msgid "Log in"
+msgstr "Zaloguj się"
+
+#: templates/users/login.html:6
+msgid "Where did the money go?"
+msgstr "Gdzie się podziały pieniądze?"
+
+#: templates/users/login.html:7
+msgid "Spendlog keeps track of every tap."
+msgstr "Spendlog śledzi każdą płatność."
+
+#: templates/users/login.html:12
+msgid "Continue"
+msgstr "Dalej"
+
+#: templates/users/login.html:14
+msgid "Spendlog · personal budget"
+msgstr "Spendlog · budżet osobisty"

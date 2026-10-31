@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% if category %}{% translate 'Edit category' %}{% else %}{% translate 'New category' %}{% endif %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% if category %}{{ category.display_name }}{% else %}{% translate 'New category' %}{% endif %}</h1>
+</div>
+<form method="post" class="card form">
+  {% csrf_token %}
+  {% include 'partials/_form.html' %}
+  <div class="form-actions">
+    <button type="submit" class="button button-primary">{% translate 'Save' %}</button>
+    <a href="{% url 'categories:category_list' %}" class="button">{% translate 'Cancel' %}</a>
+    {% if category %}<a href="{% url 'categories:category_delete' category.pk %}" class="button button-danger push-right">{% translate 'Delete' %}</a>{% endif %}
+  </div>
+</form>
+{% endblock %}

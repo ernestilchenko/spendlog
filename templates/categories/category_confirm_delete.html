@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Delete category' %}{% endblock %}
+{% block content %}
+<form method="post" class="card form">
+  {% csrf_token %}
+  <h1>{% blocktranslate with name=category.display_name %}Delete “{{ name }}”?{% endblocktranslate %}</h1>
+  <p class="muted">{% translate 'Its transactions stay and become uncategorized. Merchant rules pointing to it are removed.' %}</p>
+  <div class="form-actions">
+    <button type="submit" class="button button-danger">{% translate 'Delete' %}</button>
+    <a href="{% url 'categories:category_update' category.pk %}" class="button">{% translate 'Cancel' %}</a>
+  </div>
+</form>
+{% endblock %}
