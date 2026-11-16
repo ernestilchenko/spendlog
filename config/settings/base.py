@@ -49,6 +49,7 @@ LOCAL_APPS = [
     'spendlog.dashboard.apps.DashboardConfig',
     'spendlog.reports.apps.ReportsConfig',
     'spendlog.banking.apps.BankingConfig',
+    'spendlog.legal.apps.LegalConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
