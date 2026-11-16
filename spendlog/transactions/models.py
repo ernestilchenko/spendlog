@@ -43,6 +43,7 @@ class Transaction(TimeStampedModel):
     source = models.CharField(_('source'), max_length=20, choices=TransactionSource, default=TransactionSource.MANUAL)
     card = models.CharField(_('card'), max_length=80, blank=True)
     note = models.CharField(_('note'), max_length=255, blank=True)
+    external_id = models.CharField(max_length=128, blank=True, default='')
 
     objects = TransactionQuerySet.as_manager()
 
@@ -51,6 +52,13 @@ class Transaction(TimeStampedModel):
         verbose_name = _('transaction')
         verbose_name_plural = _('transactions')
         indexes = [models.Index(fields=('user', 'occurred_at'))]
+        constraints = [
+            models.UniqueConstraint(
+                fields=('user', 'external_id'),
+                condition=~models.Q(external_id=''),
+                name='unique_external_transaction_per_user',
+            ),
+        ]
 
     def __str__(self):
         return f'{self.merchant or self.get_kind_display()} {self.amount}'

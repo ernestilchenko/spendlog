@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n money %}
+{% block title %}{% translate 'Bank' %}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% translate 'Bank sync' %}</h1></div>
+<p class="muted">{% blocktranslate %}Spendlog reads the transactions of your bank account through Enable Banking (open banking, PSD2). Card payments, BLIK, transfers, cash withdrawals and fees arrive automatically several times a day.{% endblocktranslate %}</p>
+
+{% if not configured %}
+<section class="card"><p>{% translate 'Bank sync is not configured on the server yet' %}</p></section>
+{% else %}
+<section class="card">
+  <div class="card-head"><h2>{% if connection %}{{ connection.aspsp_name }}{% else %}{% translate 'No bank connected' %}{% endif %}</h2></div>
+  {% if connection %}
+  <p>
+    <b>{{ connection.get_status_display }}</b>
+    {% if connection.valid_until %} · {% blocktranslate with date=connection.valid_until|date:'j M Y' %}access valid until {{ date }}{% endblocktranslate %}{% endif %}
+    {% if connection.last_synced_at %} · {% blocktranslate with since=connection.last_synced_at|timesince %}synced {{ since }} ago{% endblocktranslate %}{% endif %}
+  </p>
+  {% if connection.last_error %}<p class="error">{{ connection.last_error }}</p>{% endif %}
+  {% endif %}
+  <div class="form-actions">
+    {% if is_active %}
+    <form method="post" action="{% url 'banking:sync' %}">{% csrf_token %}<button type="submit" class="button button-primary">{% translate 'Sync now' %}</button></form>
+    {% endif %}
+    <form method="post" action="{% url 'banking:connect' %}">{% csrf_token %}<button type="submit" class="button {% if not is_active %}button-primary{% endif %}">{% if connection %}{% translate 'Reconnect bank' %}{% else %}{% translate 'Connect bank' %}{% endif %}</button></form>
+  </div>
+  <small class="help">{% translate 'The bank asks to confirm access again every 180 days. Reconnecting keeps all imported transactions.' %}</small>
+</section>
+
+{% if links %}
+<section class="card">
+  <div class="card-head"><h2>{% translate 'Accounts' %}</h2></div>
+  <ul class="plain-list">
+    {% for row in links %}
+    <li class="plain-row">
+      <span><span class="dot" style="background: {{ row.link.account.color }}"></span>{{ row.link.account.name }}<br><small class="muted">{{ row.link.iban }}</small></span>
+      <span class="tx-amount">
+        {{ row.balance|money:row.link.account.currency }}
+        {% if row.link.bank_balance is not None %}<small class="tx-converted">{% blocktranslate with amount=row.link.bank_balance|money:row.link.account.currency %}bank: {{ amount }}{% endblocktranslate %}</small>{% endif %}
+        {% if row.difference %}<small class="error">{% blocktranslate with diff=row.difference|money:row.link.account.currency %}differs by {{ diff }}{% endblocktranslate %}</small>{% endif %}
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endif %}
+{% endblock %}

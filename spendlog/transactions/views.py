@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_http_methods
 
+from spendlog.banking.services import forget_bank_transaction
 from spendlog.core.choices import TransactionKind
 from spendlog.core.months import parse_month, shift_month
 from spendlog.currencies.messages import CurrencyMessages
@@ -77,6 +78,7 @@ def transaction_update(request, pk):
 def transaction_delete(request, pk):
     transaction = get_object_or_404(request.user.transactions.select_related('category'), pk=pk)
     if request.method == 'POST':
+        forget_bank_transaction(transaction)
         transaction.delete()
         messages.success(request, TransactionMessages.DELETED)
         return redirect('transactions:transaction_list')

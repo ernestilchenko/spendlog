@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spendlog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-31 14:14+0100\n"
+"POT-Creation-Date: 2026-11-16 20:21+0100\n"
 "PO-Revision-Date: 2026-10-31 12:00+0100\n"
 "Last-Translator: Ernest Ilchenko <ernestilchenko@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: config/settings/base.py:107
+#: config/settings/base.py:109
 msgid "English"
 msgstr "Англійська"
 
-#: config/settings/base.py:108
+#: config/settings/base.py:110
 msgid "Polish"
 msgstr "Польська"
 
-#: config/settings/base.py:109
+#: config/settings/base.py:111
 msgid "Ukrainian"
 msgstr "Українська"
 
@@ -77,6 +77,48 @@ msgstr "рахунок"
 #: spendlog/accounts/models.py:24
 msgid "accounts"
 msgstr "рахунки"
+
+#: spendlog/banking/messages.py:5 templates/banking/overview.html:9
+msgid "Bank sync is not configured on the server yet"
+msgstr "Синхронізацію з банком ще не налаштовано на сервері"
+
+#: spendlog/banking/messages.py:6
+#, python-format
+msgid "The bank connection failed: %(error)s"
+msgstr "Не вдалося підключитися до банку: %(error)s"
+
+#: spendlog/banking/messages.py:7
+#, python-format
+msgid "Bank connected. %(count)s new transactions imported"
+msgstr "Банк підключено. Імпортовано нових транзакцій: %(count)s"
+
+#: spendlog/banking/messages.py:8
+#, python-format
+msgid "The bank did not grant access: %(error)s"
+msgstr "Банк не надав доступ: %(error)s"
+
+#: spendlog/banking/messages.py:9
+msgid ""
+"This bank confirmation link is not valid anymore. Start the connection again"
+msgstr ""
+"Це посилання підтвердження з банку вже недійсне. Підключіть банк ще раз"
+
+#: spendlog/banking/messages.py:10
+#, python-format
+msgid "%(count)s new transactions imported"
+msgstr "Імпортовано нових транзакцій: %(count)s"
+
+#: spendlog/banking/messages.py:11
+msgid "Connect the bank first"
+msgstr "Спочатку підключіть банк"
+
+#: spendlog/banking/models.py:62
+msgid "payer contains"
+msgstr "платник містить"
+
+#: spendlog/banking/models.py:64
+msgid "passed on to others"
+msgstr "передається іншим"
 
 #: spendlog/categories/messages.py:5
 msgid "Category created"
@@ -209,13 +251,34 @@ msgstr "Дохід"
 msgid "Manual"
 msgstr "Вручну"
 
-#: spendlog/core/choices.py:26
+#: spendlog/core/choices.py:13 templates/banking/overview.html:3
+#: templates/base.html:30
+msgid "Bank"
+msgstr "Банк"
+
+#: spendlog/core/choices.py:27
 msgid "Deposit"
 msgstr "Поповнення"
 
-#: spendlog/core/choices.py:27
+#: spendlog/core/choices.py:28
 msgid "Withdrawal"
 msgstr "Зняття"
+
+#: spendlog/core/choices.py:37
+msgid "Waiting for the bank"
+msgstr "Очікування банку"
+
+#: spendlog/core/choices.py:38
+msgid "Connected"
+msgstr "Підключено"
+
+#: spendlog/core/choices.py:39
+msgid "Access expired"
+msgstr "Доступ закінчився"
+
+#: spendlog/core/choices.py:40
+msgid "Failed"
+msgstr "Помилка"
 
 #: spendlog/currencies/messages.py:5
 msgid "Could not get the exchange rate. Try again in a minute or use PLN."
@@ -370,11 +433,11 @@ msgstr "джерело"
 msgid "card"
 msgstr "картка"
 
-#: spendlog/transactions/models.py:51
+#: spendlog/transactions/models.py:52
 msgid "transaction"
 msgstr "операція"
 
-#: spendlog/transactions/models.py:52
+#: spendlog/transactions/models.py:53
 msgid "transactions"
 msgstr "операції"
 
@@ -447,8 +510,8 @@ msgid "Save"
 msgstr "Зберегти"
 
 #: templates/accounts/account_list.html:3
-#: templates/accounts/account_list.html:7 templates/base.html:26
-#: templates/dashboard/home.html:68
+#: templates/accounts/account_list.html:7 templates/banking/overview.html:32
+#: templates/base.html:26 templates/dashboard/home.html:68
 msgid "Accounts"
 msgstr "Рахунки"
 
@@ -475,6 +538,64 @@ msgstr ""
 "витрати його зменшують, доходи збільшують, а поповнення цілей переносять "
 "гроші в заощадження."
 
+#: templates/banking/overview.html:5
+msgid "Bank sync"
+msgstr "Синхронізація з банком"
+
+#: templates/banking/overview.html:6
+msgid ""
+"Spendlog reads the transactions of your bank account through Enable Banking "
+"(open banking, PSD2). Card payments, BLIK, transfers, cash withdrawals and "
+"fees arrive automatically several times a day."
+msgstr ""
+"Spendlog читає транзакції вашого рахунку через Enable Banking (open banking,"
+" PSD2). Оплати карткою, BLIK, перекази, зняття готівки та комісії "
+"з’являються автоматично кілька разів на день."
+
+#: templates/banking/overview.html:12
+msgid "No bank connected"
+msgstr "Банк не підключено"
+
+#: templates/banking/overview.html:16
+#, python-format
+msgid "access valid until %(date)s"
+msgstr "доступ дійсний до %(date)s"
+
+#: templates/banking/overview.html:17
+#, python-format
+msgid "synced %(since)s ago"
+msgstr "синхронізовано %(since)s тому"
+
+#: templates/banking/overview.html:23
+msgid "Sync now"
+msgstr "Синхронізувати зараз"
+
+#: templates/banking/overview.html:25
+msgid "Reconnect bank"
+msgstr "Підключити банк знову"
+
+#: templates/banking/overview.html:25
+msgid "Connect bank"
+msgstr "Підключити банк"
+
+#: templates/banking/overview.html:27
+msgid ""
+"The bank asks to confirm access again every 180 days. Reconnecting keeps all"
+" imported transactions."
+msgstr ""
+"Банк просить повторно підтвердити доступ кожні 180 днів. Після повторного "
+"підключення всі імпортовані транзакції залишаються."
+
+#: templates/banking/overview.html:39
+#, python-format
+msgid "bank: %(amount)s"
+msgstr "у банку: %(amount)s"
+
+#: templates/banking/overview.html:40
+#, python-format
+msgid "differs by %(diff)s"
+msgstr "різниця %(diff)s"
+
 #: templates/base.html:24 templates/dashboard/home.html:3
 msgid "Overview"
 msgstr "Огляд"
@@ -497,11 +618,11 @@ msgstr "Категорії"
 msgid "Rules"
 msgstr "Правила"
 
-#: templates/base.html:39
+#: templates/base.html:40
 msgid "Log out"
 msgstr "Вийти"
 
-#: templates/base.html:49
+#: templates/base.html:50
 msgid "Add transaction"
 msgstr "Додати операцію"
 

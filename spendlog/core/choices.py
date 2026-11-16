@@ -10,6 +10,7 @@ class TransactionKind(models.TextChoices):
 class TransactionSource(models.TextChoices):
     MANUAL = 'manual', _('Manual')
     APPLE_PAY = 'apple_pay', 'Apple Pay'
+    BANK = 'bank', _('Bank')
 
 
 class Currency(models.TextChoices):
@@ -30,3 +31,10 @@ class SavingsEntryKind(models.TextChoices):
 class TokenPurpose(models.TextChoices):
     APPLE_PAY = 'apple_pay', 'Apple Pay'
     REPORTS = 'reports', 'Reports'
+
+
+class BankConnectionStatus(models.TextChoices):
+    PENDING = 'pending', _('Waiting for the bank')
+    ACTIVE = 'active', _('Connected')
+    EXPIRED = 'expired', _('Access expired')
+    FAILED = 'failed', _('Failed')

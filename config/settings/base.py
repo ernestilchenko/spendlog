@@ -48,6 +48,7 @@ LOCAL_APPS = [
     'spendlog.integrations.apps.IntegrationsConfig',
     'spendlog.dashboard.apps.DashboardConfig',
     'spendlog.reports.apps.ReportsConfig',
+    'spendlog.banking.apps.BankingConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
@@ -123,6 +124,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 ANTHROPIC_API_KEY = get_env_variable('ANTHROPIC_API_KEY', '')
+
+ENABLE_BANKING_APP_ID = get_env_variable('ENABLE_BANKING_APP_ID', '')
+ENABLE_BANKING_KEY_PATH = get_env_variable('ENABLE_BANKING_KEY_PATH', '')
+ENABLE_BANKING_ASPSP = get_env_variable('ENABLE_BANKING_ASPSP', 'BNP Paribas')
+ENABLE_BANKING_COUNTRY = get_env_variable('ENABLE_BANKING_COUNTRY', 'PL')
+ENABLE_BANKING_CONSENT_DAYS = int(get_env_variable('ENABLE_BANKING_CONSENT_DAYS', '180'))
 CATEGORIZER_MODEL = get_env_variable('CATEGORIZER_MODEL', 'claude-opus-5')
 CATEGORIZER_TIMEOUT_SECONDS = 20.0
 

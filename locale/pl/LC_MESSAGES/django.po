@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spendlog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-31 14:14+0100\n"
+"POT-Creation-Date: 2026-11-16 20:21+0100\n"
 "PO-Revision-Date: 2026-10-31 12:00+0100\n"
 "Last-Translator: Ernest Ilchenko <ernestilchenko@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: config/settings/base.py:107
+#: config/settings/base.py:109
 msgid "English"
 msgstr "Angielski"
 
-#: config/settings/base.py:108
+#: config/settings/base.py:110
 msgid "Polish"
 msgstr "Polski"
 
-#: config/settings/base.py:109
+#: config/settings/base.py:111
 msgid "Ukrainian"
 msgstr "Ukraiński"
 
@@ -77,6 +77,48 @@ msgstr "konto"
 #: spendlog/accounts/models.py:24
 msgid "accounts"
 msgstr "konta"
+
+#: spendlog/banking/messages.py:5 templates/banking/overview.html:9
+msgid "Bank sync is not configured on the server yet"
+msgstr "Synchronizacja z bankiem nie jest jeszcze skonfigurowana na serwerze"
+
+#: spendlog/banking/messages.py:6
+#, python-format
+msgid "The bank connection failed: %(error)s"
+msgstr "Połączenie z bankiem nie powiodło się: %(error)s"
+
+#: spendlog/banking/messages.py:7
+#, python-format
+msgid "Bank connected. %(count)s new transactions imported"
+msgstr "Bank połączony. Zaimportowano nowe transakcje: %(count)s"
+
+#: spendlog/banking/messages.py:8
+#, python-format
+msgid "The bank did not grant access: %(error)s"
+msgstr "Bank nie udzielił dostępu: %(error)s"
+
+#: spendlog/banking/messages.py:9
+msgid ""
+"This bank confirmation link is not valid anymore. Start the connection again"
+msgstr ""
+"Ten link potwierdzenia z banku jest już nieważny. Połącz bank ponownie"
+
+#: spendlog/banking/messages.py:10
+#, python-format
+msgid "%(count)s new transactions imported"
+msgstr "Zaimportowano nowe transakcje: %(count)s"
+
+#: spendlog/banking/messages.py:11
+msgid "Connect the bank first"
+msgstr "Najpierw połącz bank"
+
+#: spendlog/banking/models.py:62
+msgid "payer contains"
+msgstr "płatnik zawiera"
+
+#: spendlog/banking/models.py:64
+msgid "passed on to others"
+msgstr "przekazywane dalej"
 
 #: spendlog/categories/messages.py:5
 msgid "Category created"
@@ -209,13 +251,34 @@ msgstr "Przychód"
 msgid "Manual"
 msgstr "Ręcznie"
 
-#: spendlog/core/choices.py:26
+#: spendlog/core/choices.py:13 templates/banking/overview.html:3
+#: templates/base.html:30
+msgid "Bank"
+msgstr "Bank"
+
+#: spendlog/core/choices.py:27
 msgid "Deposit"
 msgstr "Wpłata"
 
-#: spendlog/core/choices.py:27
+#: spendlog/core/choices.py:28
 msgid "Withdrawal"
 msgstr "Wypłata"
+
+#: spendlog/core/choices.py:37
+msgid "Waiting for the bank"
+msgstr "Oczekiwanie na bank"
+
+#: spendlog/core/choices.py:38
+msgid "Connected"
+msgstr "Połączono"
+
+#: spendlog/core/choices.py:39
+msgid "Access expired"
+msgstr "Dostęp wygasł"
+
+#: spendlog/core/choices.py:40
+msgid "Failed"
+msgstr "Błąd"
 
 #: spendlog/currencies/messages.py:5
 msgid "Could not get the exchange rate. Try again in a minute or use PLN."
@@ -369,11 +432,11 @@ msgstr "źródło"
 msgid "card"
 msgstr "karta"
 
-#: spendlog/transactions/models.py:51
+#: spendlog/transactions/models.py:52
 msgid "transaction"
 msgstr "transakcja"
 
-#: spendlog/transactions/models.py:52
+#: spendlog/transactions/models.py:53
 msgid "transactions"
 msgstr "transakcje"
 
@@ -445,8 +508,8 @@ msgid "Save"
 msgstr "Zapisz"
 
 #: templates/accounts/account_list.html:3
-#: templates/accounts/account_list.html:7 templates/base.html:26
-#: templates/dashboard/home.html:68
+#: templates/accounts/account_list.html:7 templates/banking/overview.html:32
+#: templates/base.html:26 templates/dashboard/home.html:68
 msgid "Accounts"
 msgstr "Konta"
 
@@ -473,6 +536,64 @@ msgstr ""
 "transakcjami: wydatki je zmniejszają, przychody zwiększają, a wpłaty na cele"
 " przenoszą pieniądze do oszczędności."
 
+#: templates/banking/overview.html:5
+msgid "Bank sync"
+msgstr "Synchronizacja z bankiem"
+
+#: templates/banking/overview.html:6
+msgid ""
+"Spendlog reads the transactions of your bank account through Enable Banking "
+"(open banking, PSD2). Card payments, BLIK, transfers, cash withdrawals and "
+"fees arrive automatically several times a day."
+msgstr ""
+"Spendlog odczytuje transakcje z Twojego konta przez Enable Banking (open "
+"banking, PSD2). Płatności kartą, BLIK, przelewy, wypłaty gotówki i opłaty "
+"pojawiają się automatycznie kilka razy dziennie."
+
+#: templates/banking/overview.html:12
+msgid "No bank connected"
+msgstr "Brak połączonego banku"
+
+#: templates/banking/overview.html:16
+#, python-format
+msgid "access valid until %(date)s"
+msgstr "dostęp ważny do %(date)s"
+
+#: templates/banking/overview.html:17
+#, python-format
+msgid "synced %(since)s ago"
+msgstr "zsynchronizowano %(since)s temu"
+
+#: templates/banking/overview.html:23
+msgid "Sync now"
+msgstr "Synchronizuj teraz"
+
+#: templates/banking/overview.html:25
+msgid "Reconnect bank"
+msgstr "Połącz bank ponownie"
+
+#: templates/banking/overview.html:25
+msgid "Connect bank"
+msgstr "Połącz bank"
+
+#: templates/banking/overview.html:27
+msgid ""
+"The bank asks to confirm access again every 180 days. Reconnecting keeps all"
+" imported transactions."
+msgstr ""
+"Bank prosi o ponowne potwierdzenie dostępu co 180 dni. Ponowne połączenie "
+"zachowuje wszystkie zaimportowane transakcje."
+
+#: templates/banking/overview.html:39
+#, python-format
+msgid "bank: %(amount)s"
+msgstr "w banku: %(amount)s"
+
+#: templates/banking/overview.html:40
+#, python-format
+msgid "differs by %(diff)s"
+msgstr "różnica %(diff)s"
+
 #: templates/base.html:24 templates/dashboard/home.html:3
 msgid "Overview"
 msgstr "Przegląd"
@@ -495,11 +616,11 @@ msgstr "Kategorie"
 msgid "Rules"
 msgstr "Reguły"
 
-#: templates/base.html:39
+#: templates/base.html:40
 msgid "Log out"
 msgstr "Wyloguj"
 
-#: templates/base.html:49
+#: templates/base.html:50
 msgid "Add transaction"
 msgstr "Dodaj transakcję"
 
