@@ -5,7 +5,7 @@ from decimal import Decimal, InvalidOperation
 
 from django.utils import timezone
 
-from spendlog.core.choices import Currency
+from spendlog.core.choices import Currency, TokenPurpose
 
 from .models import ApiToken
 
@@ -32,11 +32,11 @@ def hash_token(raw_token):
     return hashlib.sha256(raw_token.encode()).hexdigest()
 
 
-def get_user_by_token(request):
+def get_user_by_token(request, purpose=TokenPurpose.APPLE_PAY):
     scheme, _, raw_token = request.headers.get('Authorization', '').partition(' ')
     if scheme != 'Token' or not raw_token.strip():
         return None
-    token = ApiToken.objects.select_related('user').filter(key_hash=hash_token(raw_token.strip())).first()
+    token = ApiToken.objects.select_related('user').filter(key_hash=hash_token(raw_token.strip()), purpose=purpose).first()
     if token is None or not token.user.is_active:
         return None
     token.last_used_at = timezone.now()

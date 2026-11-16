@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
+from spendlog.core.choices import TokenPurpose
 from spendlog.currencies.messages import CurrencyMessages
 from spendlog.currencies.services import ExchangeRateUnavailable
 
@@ -57,7 +58,7 @@ def apple_pay_ingest(request):
 @require_GET
 def apple_pay_setup(request):
     context = {
-        'token': ApiToken.objects.filter(user=request.user).first(),
+        'token': ApiToken.objects.filter(user=request.user, purpose=TokenPurpose.APPLE_PAY).first(),
         'new_token': request.session.pop(NEW_TOKEN_SESSION_KEY, None),
         'endpoint_url': request.build_absolute_uri(reverse('integrations:apple_pay_ingest')),
     }

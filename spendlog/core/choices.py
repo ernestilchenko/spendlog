@@ -25,3 +25,8 @@ class Currency(models.TextChoices):
 class SavingsEntryKind(models.TextChoices):
     DEPOSIT = 'deposit', _('Deposit')
     WITHDRAWAL = 'withdrawal', _('Withdrawal')
+
+
+class TokenPurpose(models.TextChoices):
+    APPLE_PAY = 'apple_pay', 'Apple Pay'
+    REPORTS = 'reports', 'Reports'

@@ -11,4 +11,5 @@ urlpatterns = [
     path('accounts/', include('spendlog.accounts.urls')),
     path('', include('spendlog.categories.urls')),
     path('', include('spendlog.integrations.urls')),
+    path('', include('spendlog.reports.urls')),
 ]

@@ -4,7 +4,7 @@ from spendlog.accounts.services import assign_account, default_account
 from spendlog.categories.services import categorize_expense
 from django.utils import timezone
 
-from spendlog.core.choices import Currency, TransactionKind, TransactionSource
+from spendlog.core.choices import Currency, TokenPurpose, TransactionKind, TransactionSource
 from spendlog.core.formatting import format_money
 from spendlog.currencies.services import apply_conversion
 from spendlog.transactions.models import Transaction
@@ -14,9 +14,13 @@ from .models import ApiToken
 from .utils import hash_token
 
 
-def issue_token(user):
+def issue_token(user, purpose=TokenPurpose.APPLE_PAY):
     raw_token = secrets.token_urlsafe(32)
-    ApiToken.objects.update_or_create(user=user, defaults={'key_hash': hash_token(raw_token), 'last_used_at': None})
+    ApiToken.objects.update_or_create(
+        user=user,
+        purpose=purpose,
+        defaults={'key_hash': hash_token(raw_token), 'last_used_at': None},
+    )
     return raw_token
 
 
